@@ -8,9 +8,60 @@
         <servlet-name>Authoriation</servlet-name>
         <servlet-class>com.wordpress.ilyaps.servlets.AuthorizationServlet</servlet-class>
     </servlet>
-    
+
     <servlet-mapping>
         <servlet-name>Authoriation</servlet-name>
-        <url-pattern>/auth</url-pattern>
+        <url-pattern>/authoriation</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Registration</servlet-name>
+        <servlet-class>com.wordpress.ilyaps.servlets.RegistrationServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Registration</servlet-name>
+        <url-pattern>/registration</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>EditProfile</servlet-name>
+        <servlet-class>com.wordpress.ilyaps.servlets.EditProfileServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>EditProfile</servlet-name>
+        <url-pattern>/edit-profile</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CreateTask</servlet-name>
+        <servlet-class>com.wordpress.ilyaps.servlets.CreateTaskServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CreateTask</servlet-name>
+        <url-pattern>/create-task</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>WantToHelp</servlet-name>
+        <servlet-class>com.wordpress.ilyaps.servlets.WantToHelpServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>WantToHelp</servlet-name>
+        <url-pattern>/want-to-help</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>com.wordpress.ilyaps.servlets.LogoutServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+
 </web-app>

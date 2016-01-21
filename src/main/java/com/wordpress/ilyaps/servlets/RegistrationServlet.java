@@ -2,7 +2,6 @@ package com.wordpress.ilyaps.servlets;
 
 import com.wordpress.ilyaps.dao.MemberDAO;
 import com.wordpress.ilyaps.models.Member;
-import org.apache.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,10 +13,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * Created by ilyap on 24.12.2015.
+ * Created by ilyap on 25.12.2015.
  */
-@WebServlet(name = "AuthorizationServlet")
-public class AuthorizationServlet extends HttpServlet {
+@WebServlet(name = "RegistrationServlet")
+public class RegistrationServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter pw = response.getWriter();
@@ -25,28 +24,37 @@ public class AuthorizationServlet extends HttpServlet {
 
         if (!verificationParametersInRequest(request)) {
             pw.println(ServletHelper.BAD_FORM);
-            pw.println(ServletHelper.getHtmlRedirect("/autorization"));
+            pw.println(ServletHelper.getHtmlRedirect("/registration"));
             return;
         }
 
-        String email = request.getParameter("email");
-        int hashPassword = request.getParameter("password").hashCode();
+        Member member = new Member();
 
-        Member member = MemberDAO.find(email, hashPassword);
-        if (member == null) {
+        member.setFirstname(request.getParameter("firstname"));
+        member.setSurname(request.getParameter("surname"));
+        member.setEmail(request.getParameter("email"));
+        member.setHashPassword(request.getParameter("password").hashCode());
+        member.setUniversityShortName(request.getParameter("university"));
+
+        if (!MemberDAO.insert(member)) {
             pw.println(ServletHelper.ERROR);
-            pw.println(ServletHelper.getHtmlRedirect("/autorization"));
+            pw.println(ServletHelper.getHtmlRedirect("/registration"));
             return;
         }
-
-        request.getSession().setAttribute("authorization", true);
-        request.getSession().setAttribute("member", member);
 
         pw.println(ServletHelper.SUCCESSFUL);
         pw.println(ServletHelper.getHtmlRedirect("/"));
     }
 
     boolean verificationParametersInRequest(HttpServletRequest request) {
+        if (request.getParameter("firstname").length() < 4) {
+            return false;
+        }
+
+        if (request.getParameter("surname").length() < 4) {
+            return false;
+        }
+
         if (request.getParameter("email").length() < 4) {
             return false;
         }
@@ -57,5 +65,4 @@ public class AuthorizationServlet extends HttpServlet {
 
         return true;
     }
-
 }
