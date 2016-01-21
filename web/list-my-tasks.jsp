@@ -1,5 +1,7 @@
 <%@ page import="com.wordpress.ilyaps.models.Member" %>
-<%@ page import="com.wordpress.ilyaps.models.Task" %><%--
+<%@ page import="com.wordpress.ilyaps.models.Task" %>
+<%@ page import="com.wordpress.ilyaps.models.WantToHelp" %>
+<%@ page import="com.wordpress.ilyaps.dao.WantToHelpDAO" %><%--
   Created by IntelliJ IDEA.
   User: ilyap
   Date: 21.01.2016
@@ -49,6 +51,13 @@
                 </span>
                 <input type="hidden"  name = "task-id" value = "<%= task.getTaskId() %>">
             </form>
+            <% for (WantToHelp help : WantToHelpDAO.findByTaskId(task.getTaskId())) { %>
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon" id="sizing-addon1"><%= help.getMemberEmail() %></span>
+                <input type="text" class="form-control" value="<%= help.getNote()%>" readonly>
+            </div>
+            <br>
+            <%}%>
         </div>
 
     </div>

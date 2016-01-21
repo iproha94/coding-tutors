@@ -25,7 +25,7 @@ public class AuthorizationServlet extends HttpServlet {
 
         if (!verificationParametersInRequest(request)) {
             pw.println(ServletHelper.BAD_FORM);
-            pw.println(ServletHelper.getHtmlRedirect("/autorization.jsp"));
+            pw.println(ServletHelper.getHtmlRedirect("/authorization.jsp"));
             return;
         }
 
@@ -35,7 +35,7 @@ public class AuthorizationServlet extends HttpServlet {
         Member member = MemberDAO.find(email, hashPassword);
         if (member == null) {
             pw.println(ServletHelper.ERROR);
-            pw.println(ServletHelper.getHtmlRedirect("/autorization.jsp"));
+            pw.println(ServletHelper.getHtmlRedirect("/authorization.jsp"));
             return;
         }
 
