@@ -1,5 +1,6 @@
 package com.wordpress.ilyaps.dao;
 
+import com.sun.istack.internal.Nullable;
 import com.wordpress.ilyaps.models.Member;
 import com.wordpress.ilyaps.services.DBService;
 import org.apache.log4j.Logger;
@@ -13,6 +14,7 @@ import javax.persistence.EntityManager;
 public class MemberDAO extends BaseDAO {
     private static final Logger LOGGER = Logger.getLogger(MemberDAO.class);
 
+    @Nullable
     public static Member find(String email, int hashPassword) {
         Member member = find(email);
 
@@ -23,6 +25,7 @@ public class MemberDAO extends BaseDAO {
         return member;
     }
 
+    @Nullable
     public static Member find(String email) {
         EntityManager em = DBService.getInstance().getEm();
 
@@ -30,24 +33,14 @@ public class MemberDAO extends BaseDAO {
         try {
             em.getTransaction().begin();
             member = em.find(Member.class, email);
-            em.getTransaction().commit();
         } catch (Exception e) {
             LOGGER.warn("find", e);
+        } finally {
+            em.getTransaction().commit();
         }
 
         return member;
     }
 
-    public static boolean update(Member member) {
-        EntityManager em = DBService.getInstance().getEm();
-        try {
-            em.getTransaction().begin();
-            em.merge(member);
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            return false;
-        }
 
-        return true;
-    }
 }

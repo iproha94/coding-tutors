@@ -21,10 +21,10 @@
                     if (request.getSession().getAttribute("authorization") != null) {
                 %>
                 <li ><a href="edit-profile.jsp"><span class="glyphicon glyphicon-user" aria-hidden="true">
-                    <%
-                        out.print(((Member) request.getSession().getAttribute("member")).getFullname());
-                    %>
-                        </span></a></li>
+                <%
+                    out.print(((Member) request.getSession().getAttribute("member")).getFullname());
+                %>
+                </span></a></li>
                 <li><a href="create-task.jsp"><span class="glyphicon glyphicon-new-window" > Создать задачу</span></a></li>
                 <li><a href="list-my-tasks.jsp"><span class="glyphicon glyphicon-th-list" > Мои задачи</span></a></li>
                 <li><a href="list-tasks.jsp"><span class="glyphicon glyphicon-list" > Все задачи</span></a></li>
@@ -33,7 +33,7 @@
                 } else {
                 %>
                 <li><a href="registration.jsp">Регистрация</a></li>
-                <li><a href="authoriation.jsp">Авторизация</a></li>
+                <li><a href="authorization.jsp">Авторизация</a></li>
                 <%
                     }
                 %>

@@ -1,6 +1,8 @@
 package com.wordpress.ilyaps.servlets;
 
+import com.wordpress.ilyaps.dao.TaskDAO;
 import com.wordpress.ilyaps.dao.WantToHelpDAO;
+import com.wordpress.ilyaps.models.Task;
 import com.wordpress.ilyaps.models.WantToHelp;
 
 import javax.servlet.ServletException;
@@ -27,9 +29,10 @@ public class WantToHelpServlet extends HttpServlet {
 
         WantToHelp wantToHelp = new WantToHelp();
 
-        wantToHelp.setComment(request.getParameter("comment"));
+        wantToHelp.setNote(request.getParameter("note"));
         wantToHelp.setMemberEmail(request.getParameter("member-email"));
-        wantToHelp.setTaskId(new Integer(request.getParameter("task-id")));
+        int taskId = new Integer(request.getParameter("task-id"));
+        wantToHelp.setTaskId(taskId);
 
         if (!WantToHelpDAO.insert(wantToHelp)) {
             pw.println(ServletHelper.ERROR);
@@ -37,12 +40,16 @@ public class WantToHelpServlet extends HttpServlet {
             return;
         }
 
+        Task task = TaskDAO.find(taskId);
+        task.incCountWantToHelp();
+        TaskDAO.update(task);
+
         pw.println(ServletHelper.SUCCESSFUL);
         pw.println(ServletHelper.getHtmlRedirect("list-tasks.jsp"));
     }
 
     boolean verificationParametersInRequest(HttpServletRequest request) {
-        if (request.getParameter("comment").length() < 4) {
+        if (request.getParameter("note").length() < 4) {
             return false;
         }
 

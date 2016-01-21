@@ -12,7 +12,7 @@
     <%@include file='top.jsp' %>
 
     <div class="container">
-        <form action="authoriation" method="post" class="form-signin">
+        <form action="authorization" method="post" class="form-signin">
             <h2 class="form-signin-heading">Please sign in</h2>
             <br>
             <div class="input-group input-group-lg">

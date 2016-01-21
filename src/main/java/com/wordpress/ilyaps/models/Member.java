@@ -1,6 +1,9 @@
 package com.wordpress.ilyaps.models;
 
+import com.sun.istack.internal.NotNull;
+import com.sun.istack.internal.Nullable;
 import com.wordpress.ilyaps.dao.TaskDAO;
+import com.wordpress.ilyaps.dao.WantToHelpDAO;
 
 import javax.persistence.*;
 import java.util.List;
@@ -68,8 +71,13 @@ public class Member {
         return surname;
     }
 
+    @NotNull
     public List<Task> getListMyTasks() {
-        return TaskDAO.findByEmailCreator(email);
+        return TaskDAO.findTasksByEmailCreator(email);
+    }
+
+    public String getCommentForTask(int taskId) {
+        return WantToHelpDAO.getCommentForTaskByEmail(taskId, email);
     }
 
     @Override

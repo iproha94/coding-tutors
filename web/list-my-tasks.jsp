@@ -43,9 +43,9 @@
         </div>
 
         <div class="panel-footer">
-            <form action="want-to-help" method="post">
+            <form action="close-task" method="post">
                 <span class="btn">
-                    <button class="btn btn-danger" type="button">Закрыть</button>
+                    <button class="btn btn-danger" type="submit">Закрыть</button>
                 </span>
                 <input type="hidden"  name = "task-id" value = "<%= task.getTaskId() %>">
             </form>

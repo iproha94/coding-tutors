@@ -21,7 +21,7 @@ public class EditProfileServlet extends HttpServlet {
 
         if (!verificationParametersInRequest(request)) {
             pw.println(ServletHelper.BAD_FORM);
-            pw.println(ServletHelper.getHtmlRedirect("/edit-profile"));
+            pw.println(ServletHelper.getHtmlRedirect("/edit-profile.jsp"));
             return;
         }
 
@@ -36,7 +36,7 @@ public class EditProfileServlet extends HttpServlet {
 
         if (!MemberDAO.update(member)) {
             pw.println(ServletHelper.ERROR);
-            pw.println(ServletHelper.getHtmlRedirect("/edit-profile"));
+            pw.println(ServletHelper.getHtmlRedirect("/edit-profile.jsp"));
             return;
         }
 

@@ -11,7 +11,7 @@
 
     <servlet-mapping>
         <servlet-name>Authoriation</servlet-name>
-        <url-pattern>/authoriation</url-pattern>
+        <url-pattern>/authorization</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -52,6 +52,17 @@
     <servlet-mapping>
         <servlet-name>WantToHelp</servlet-name>
         <url-pattern>/want-to-help</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>CloseTask</servlet-name>
+        <servlet-class>com.wordpress.ilyaps.servlets.CloseTaskServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CloseTask</servlet-name>
+        <url-pattern>/close-task</url-pattern>
     </servlet-mapping>
 
     <servlet>

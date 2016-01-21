@@ -24,7 +24,7 @@ public class RegistrationServlet extends HttpServlet {
 
         if (!verificationParametersInRequest(request)) {
             pw.println(ServletHelper.BAD_FORM);
-            pw.println(ServletHelper.getHtmlRedirect("/registration"));
+            pw.println(ServletHelper.getHtmlRedirect("/registration.jsp"));
             return;
         }
 
@@ -38,7 +38,7 @@ public class RegistrationServlet extends HttpServlet {
 
         if (!MemberDAO.insert(member)) {
             pw.println(ServletHelper.ERROR);
-            pw.println(ServletHelper.getHtmlRedirect("/registration"));
+            pw.println(ServletHelper.getHtmlRedirect("/registration.jsp"));
             return;
         }
 

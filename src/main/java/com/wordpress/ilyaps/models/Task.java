@@ -18,6 +18,15 @@ public class Task {
     private String title;
     @Column(name = "TEXT")
     private String text;
+
+    public int getCountWantToHelp() {
+        return countWantToHelp;
+    }
+
+    public void incCountWantToHelp() {
+        countWantToHelp++;
+    }
+
     @Column(name = "OPEN")
     private boolean isOpen = true;
     @Column(name = "COUNTWANTTOHELP")

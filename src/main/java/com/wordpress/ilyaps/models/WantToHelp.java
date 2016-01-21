@@ -6,7 +6,7 @@ import javax.persistence.*;
  * Created by ilyap on 25.12.2015.
  */
 @Entity
-@Table(name = "WANTTOHELP")
+@Table(name = "WANTTOHELPS")
 public class WantToHelp {
     @Id
     @Column(name = "WANTTOHELPID")
@@ -16,8 +16,8 @@ public class WantToHelp {
     private int taskId;
     @Column(name = "MEMBEREMAIL")
     private String memberEmail;
-    @Column(name = "COMMENT")
-    private String comment;
+    @Column(name = "NOTE")
+    private String note;
 
     public void setTaskId(int taskId) {
         this.taskId = taskId;
@@ -27,12 +27,11 @@ public class WantToHelp {
         this.memberEmail = memberEmail;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
+    public void setNote(String comment) {
+        this.note = comment;
     }
 
     public int getTaskId() {
-
         return taskId;
     }
 
@@ -40,7 +39,7 @@ public class WantToHelp {
         return memberEmail;
     }
 
-    public String getComment() {
-        return comment;
+    public String getNote() {
+        return note;
     }
 }
