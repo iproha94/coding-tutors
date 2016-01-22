@@ -1,7 +1,10 @@
 package com.wordpress.ilyaps.servlets;
 
+import com.wordpress.ilyaps.Logic.Compliance;
+import com.wordpress.ilyaps.dao.MemberDAO;
 import com.wordpress.ilyaps.dao.TaskDAO;
 import com.wordpress.ilyaps.dao.WantToHelpDAO;
+import com.wordpress.ilyaps.models.Member;
 import com.wordpress.ilyaps.models.Task;
 import com.wordpress.ilyaps.models.WantToHelp;
 
@@ -30,9 +33,18 @@ public class WantToHelpServlet extends HttpServlet {
         WantToHelp wantToHelp = new WantToHelp();
 
         wantToHelp.setNote(request.getParameter("note"));
-        wantToHelp.setMemberEmail(request.getParameter("member-email"));
+
         int taskId = new Integer(request.getParameter("task-id"));
-        wantToHelp.setTaskId(taskId);
+        Task task =TaskDAO.find(taskId);
+        wantToHelp.setTask(task);
+
+        String memberHelperEmail = request.getParameter("member-email");
+        Member helper = MemberDAO.find(memberHelperEmail);
+        wantToHelp.setMemberHelper(helper);
+
+        Member need = task.getMemberNeed();
+
+        wantToHelp.setLevelOfCompliance(Compliance.getComplianceMembers(need, helper));
 
         if (!WantToHelpDAO.insert(wantToHelp)) {
             pw.println(ServletHelper.ERROR);
@@ -40,7 +52,6 @@ public class WantToHelpServlet extends HttpServlet {
             return;
         }
 
-        Task task = TaskDAO.find(taskId);
         task.incCountWantToHelp();
         TaskDAO.update(task);
 
@@ -49,10 +60,7 @@ public class WantToHelpServlet extends HttpServlet {
     }
 
     boolean verificationParametersInRequest(HttpServletRequest request) {
-        if (request.getParameter("note").length() < 4) {
-            return false;
-        }
+        return request.getParameter("note").length() >= 4;
 
-        return true;
     }
 }

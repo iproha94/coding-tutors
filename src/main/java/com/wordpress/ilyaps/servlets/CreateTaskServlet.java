@@ -29,7 +29,7 @@ public class CreateTaskServlet extends HttpServlet {
         Task task = new Task();
         Member member = (Member) request.getSession().getAttribute("member");
 
-        task.setMemberEmail(member.getEmail());
+        task.setMemberNeed(member);
         task.setText(request.getParameter("text"));
         task.setTitle(request.getParameter("title"));
 

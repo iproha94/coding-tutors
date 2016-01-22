@@ -12,31 +12,43 @@ public class WantToHelp {
     @Column(name = "WANTTOHELPID")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int wantToHelpId;
-    @Column(name = "TASKID")
-    private int taskId;
-    @Column(name = "MEMBEREMAIL")
-    private String memberEmail;
+    @ManyToOne
+    @JoinColumn(name = "TASKID")
+    private Task task;
+    @ManyToOne
+    @JoinColumn(name = "MEMBEREMAIL")
+    private Member memberHelper;
     @Column(name = "NOTE")
     private String note;
+    @Column(name = "LEVELOFCOMPLIANCE")
+    private int levelOfCompliance = 0;
 
-    public void setTaskId(int taskId) {
-        this.taskId = taskId;
+    public int getLevelOfCompliance() {
+        return levelOfCompliance;
     }
 
-    public void setMemberEmail(String memberEmail) {
-        this.memberEmail = memberEmail;
+    public void setLevelOfCompliance(int levelOfCompliance) {
+        this.levelOfCompliance = levelOfCompliance;
+    }
+
+    public void setTask(Task task) {
+        this.task = task;
+    }
+
+    public void setMemberHelper(Member memberHelper) {
+        this.memberHelper = memberHelper;
     }
 
     public void setNote(String comment) {
         this.note = comment;
     }
 
-    public int getTaskId() {
-        return taskId;
+    public Task getTask() {
+        return task;
     }
 
-    public String getMemberEmail() {
-        return memberEmail;
+    public Member getMemberHelper() {
+        return memberHelper;
     }
 
     public String getNote() {

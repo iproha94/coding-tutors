@@ -1,7 +1,8 @@
 <%@ page import="com.wordpress.ilyaps.models.Member" %>
 <%@ page import="com.wordpress.ilyaps.models.Task" %>
 <%@ page import="com.wordpress.ilyaps.models.WantToHelp" %>
-<%@ page import="com.wordpress.ilyaps.dao.WantToHelpDAO" %><%--
+<%@ page import="com.wordpress.ilyaps.dao.WantToHelpDAO" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: ilyap
   Date: 21.01.2016
@@ -13,15 +14,6 @@
 <head>
     <title>list my tasks</title>
 
-    <style>
-        body {
-            margin: 0; /* Убираем отступы */
-        }
-        .task {
-            margin: 0% 5%; /* Отступы вокруг */
-        }
-    </style>
-
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
@@ -31,7 +23,7 @@
 <%@include file='top.jsp' %>
 
 <% Member member = (Member) request.getSession().getAttribute("member"); %>
-<div class="task container">
+<div class="container">
     <h2 class="form-heading">List my tasks</h2>
     <% for (Task task : member.getListMyTasks()) {%>
     <div class="panel <% out.print(task.isOpen() ? "panel-success" : "panel-danger"); %>" >
@@ -44,21 +36,30 @@
                 <%= task.getText() %>
         </div>
 
+        <table class="table">
+            <% List<WantToHelp> helps = task.getListWantToHelps(); %>
+
+            <% if (helps.size() > 0) { %>
+                <tr><td>email</td><td>соответствие</td><td>note</td></tr>
+            <% } %>
+
+            <% for (WantToHelp help : helps) { %>
+            <tr>
+                <td width="15%"><%= help.getMemberHelper().getEmail() %></td>
+                <td width="5%"><%= help.getLevelOfCompliance() %></td>
+                <td><%= help.getNote() %></td>
+            </tr>
+            <%}%>
+        </table>
+
+        <% if (task.isOpen()) { %>
         <div class="panel-footer">
             <form action="close-task" method="post">
-                <span class="btn">
-                    <button class="btn btn-danger" type="submit">Закрыть</button>
-                </span>
+                <button class="btn btn-danger" type="submit">Закрыть</button>
                 <input type="hidden"  name = "task-id" value = "<%= task.getTaskId() %>">
             </form>
-            <% for (WantToHelp help : WantToHelpDAO.findByTaskId(task.getTaskId())) { %>
-            <div class="input-group input-group-lg">
-                <span class="input-group-addon" id="sizing-addon1"><%= help.getMemberEmail() %></span>
-                <input type="text" class="form-control" value="<%= help.getNote()%>" readonly>
-            </div>
-            <br>
-            <%}%>
         </div>
+        <%}%>
 
     </div>
     <%}%>

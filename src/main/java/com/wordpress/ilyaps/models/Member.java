@@ -1,7 +1,6 @@
 package com.wordpress.ilyaps.models;
 
 import com.sun.istack.internal.NotNull;
-import com.sun.istack.internal.Nullable;
 import com.wordpress.ilyaps.dao.TaskDAO;
 import com.wordpress.ilyaps.dao.WantToHelpDAO;
 
@@ -76,8 +75,8 @@ public class Member {
         return TaskDAO.findTasksByEmailCreator(email);
     }
 
-    public String getCommentForTask(int taskId) {
-        return WantToHelpDAO.getCommentForTaskByEmail(taskId, email);
+    public String getMyNoteForTask(Task task) {
+        return WantToHelpDAO.getNoteForTaskByEmail(task, this);
     }
 
     @Override

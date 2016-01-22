@@ -44,11 +44,11 @@ public class TaskDAO extends BaseDAO {
         List<Task> tasks = null;
         try {
             em.getTransaction().begin();
-            tasks = em.createQuery("SELECT t FROM Task t where t.memberEmail = :value1")
+            tasks = em.createQuery("SELECT t FROM Task t where t.memberNeed.email = :value1")
                     .setParameter("value1", email).getResultList();
 
         } catch (Exception e) {
-            LOGGER.warn("findAllOpen", e);
+            LOGGER.warn("findTasksByEmailCreator", e);
         }finally {
             em.getTransaction().commit();
         }

@@ -16,7 +16,7 @@
     <div class="container">
         <h2 class="form-heading">List all tasks</h2>
         <% for (Task task : TaskDAO.findAllOpen()) {
-            if (!task.getMemberEmail().equals(member.getEmail())) {%>
+            if (!task.getMemberNeed().getEmail().equals(member.getEmail())) {%>
                 <div class="panel panel-success">
 
                     <div class="panel-heading">
@@ -27,23 +27,29 @@
                         <%= task.getText() %>
                     </div>
 
+                    <form action="want-to-help" method="post">
+                        <div class=" input-group panel-body">
+                            <% String comment = member.getMyNoteForTask(task); %>
+                            <% if (comment == null) { %>
+                            <span class="input-group-btn">
+                                <button class="btn btn-success " type="submit">Помочь!</button>
+                            </span>
+                            <input type="text" class="form-control" name = "note" placeholder="note">
+                            <% } else { %>
+                            <span class="input-group-addon">
+                                Ваш комментарий
+                            </span>
+                            <input type="text" class="form-control" value="<%= comment %>" readonly>
+                            <% } %>
+                        </div>
+
+                        <input type="hidden"  name = "task-id" value = "<%= task.getTaskId() %>">
+                        <input type="hidden"  name = "member-email" value = "<%= member.getEmail() %>">
+                    </form>
+
+
                     <div class="panel-footer">
                         <p> Хотят помочь:<%= task.getCountWantToHelp()%> </p>
-                        <form action="want-to-help" method="post">
-                            <div class="row input-group">
-                                <% String comment = member.getCommentForTask(task.getTaskId()); %>
-                                <% if (comment == null) { %>
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-success" type="submit">Помочь!</button>
-                                    </span>
-                                    <input type="text" class="form-control" name = "note" placeholder="note">
-                                    <input type="hidden"  name = "task-id" value = "<%= task.getTaskId() %>">
-                                    <input type="hidden"  name = "member-email" value = "<%= member.getEmail() %>">
-                                <% } else { %>
-                                    <input type="text" class="form-control" value="<%= comment %>" readonly>
-                                <% } %>
-                            </div>
-                        </form>
                     </div>
                 </div>
             <%}

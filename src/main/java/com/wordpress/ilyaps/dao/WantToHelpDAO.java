@@ -2,6 +2,8 @@ package com.wordpress.ilyaps.dao;
 
 import com.sun.istack.internal.NotNull;
 import com.sun.istack.internal.Nullable;
+import com.wordpress.ilyaps.models.Member;
+import com.wordpress.ilyaps.models.Task;
 import com.wordpress.ilyaps.models.WantToHelp;
 import com.wordpress.ilyaps.services.DBService;
 import org.apache.log4j.Logger;
@@ -17,14 +19,14 @@ public class WantToHelpDAO extends BaseDAO {
     private static final Logger LOGGER = Logger.getLogger(WantToHelpDAO.class);
 
     @NotNull
-    public static List<WantToHelp> findByTaskId(int taskId) {
+    public static List<WantToHelp> findByTaskId(Task task) {
         EntityManager em = DBService.getInstance().getEm();
 
         List<WantToHelp> helpers = null;
         try {
             em.getTransaction().begin();
-            helpers = em.createQuery("SELECT w FROM WantToHelp w where w.taskId = :taskId")
-                    .setParameter("taskId", taskId).getResultList();
+            helpers = em.createQuery("SELECT w FROM WantToHelp w where w.task = :task")
+                    .setParameter("task", task).getResultList();
 
         } catch (Exception e) {
             LOGGER.warn("findAllOpen", e);
@@ -36,16 +38,16 @@ public class WantToHelpDAO extends BaseDAO {
     }
 
     @Nullable
-    public static String getCommentForTaskByEmail(int taskId, String memberEmail) {
+    public static String getNoteForTaskByEmail(Task task, Member member) {
         EntityManager em = DBService.getInstance().getEm();
 
         WantToHelp wantToHelp = null;
         try {
             em.getTransaction().begin();
             wantToHelp = (WantToHelp) em
-                    .createQuery("SELECT w FROM WantToHelp w where w.taskId = :taskId and w.memberEmail = :memberEmail")
-                    .setParameter("taskId", taskId)
-                    .setParameter("memberEmail", memberEmail)
+                    .createQuery("SELECT w FROM WantToHelp w where w.task = :task and w.memberHelper = :member")
+                    .setParameter("task", task)
+                    .setParameter("member", member)
                     .getSingleResult();
 
         } catch (Exception e) {
@@ -56,6 +58,5 @@ public class WantToHelpDAO extends BaseDAO {
 
         return wantToHelp != null ? wantToHelp.getNote() : null ;
     }
-
 
 }
