@@ -11,9 +11,13 @@
     .p {
         word-spacing: -7px;
     }
+
+    .b {
+        margin-bottom: 0px;
+    }
 </style>
 
-<nav class="navbar navbar-default navbar-static-top p">
+<nav class="navbar navbar-default navbar-static-top p b">
     <div class="container-fluid" >
 
         <div class="navbar-header" >
