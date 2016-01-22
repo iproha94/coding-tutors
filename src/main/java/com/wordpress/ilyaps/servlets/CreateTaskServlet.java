@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * Created by ilyap on 21.01.2016.
@@ -33,6 +35,7 @@ public class CreateTaskServlet extends HttpServlet {
         task.setMemberNeed(member);
         task.setText(request.getParameter("text"));
         task.setTitle(request.getParameter("title"));
+        task.setDateTimeField(new Timestamp(new Date().getTime()));
 
         if (!TaskDAO.insert(task)) {
             pw.println(ServletHelper.ERROR);
