@@ -18,7 +18,7 @@
 
     <div class="container">
         <h2 class="form-heading">List all tasks (<%=TaskDAO.count()%>)</h2>
-        <% int start = new Integer(request.getParameter("start")); %>
+        <% int start = request.getParameter("start") != null ? new Integer(request.getParameter("start")) : 0; %>
         <nav>
             <ul class="pager">
                 <li class="previous"><a href="list-tasks.jsp?start=<%=start - 10%>"><span aria-hidden="true">&larr;</span> Older</a></li>
