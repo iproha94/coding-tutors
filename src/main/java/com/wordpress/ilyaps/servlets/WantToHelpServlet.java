@@ -22,7 +22,8 @@ public class WantToHelpServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter pw = response.getWriter();
-        response.setContentType("text/html");
+        response.setContentType("text/html; charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
 
         if (!verificationParametersInRequest(request)) {
             pw.println(ServletHelper.BAD_FORM);
@@ -36,7 +37,6 @@ public class WantToHelpServlet extends HttpServlet {
 
         int taskId = new Integer(request.getParameter("task-id"));
         Task task =TaskDAO.find(taskId);
-        wantToHelp.setTask(task);
 
         String memberHelperEmail = request.getParameter("member-email");
         Member helper = MemberDAO.find(memberHelperEmail);
@@ -46,14 +46,7 @@ public class WantToHelpServlet extends HttpServlet {
 
         wantToHelp.setLevelOfCompliance(Compliance.getComplianceMembers(need, helper));
 
-        if (!WantToHelpDAO.insert(wantToHelp)) {
-            pw.println(ServletHelper.ERROR);
-            pw.println(ServletHelper.getHtmlRedirect("/list-tasks.jsp"));
-            return;
-        }
-
-        task.incCountWantToHelp();
-        TaskDAO.update(task);
+        task.addWantToHelp(wantToHelp);
 
         pw.println(ServletHelper.SUCCESSFUL);
         pw.println(ServletHelper.getHtmlRedirect("list-tasks.jsp"));

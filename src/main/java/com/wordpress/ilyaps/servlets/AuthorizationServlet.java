@@ -21,7 +21,8 @@ public class AuthorizationServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter pw = response.getWriter();
-        response.setContentType("text/html");
+        response.setContentType("text/html; charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
 
         if (!verificationParametersInRequest(request)) {
             pw.println(ServletHelper.BAD_FORM);

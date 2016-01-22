@@ -9,7 +9,7 @@
   Time: 19:24
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <html>
 <head>
     <title>list my tasks</title>
@@ -32,7 +32,7 @@
                 <%= task.getTitle() %>
         </div>
 
-        <div class="panel-body">
+        <div class="panel-footer">
                 <%= task.getText() %>
         </div>
 

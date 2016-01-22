@@ -1,6 +1,8 @@
 package com.wordpress.ilyaps.models;
 
+import com.wordpress.ilyaps.dao.TaskDAO;
 import com.wordpress.ilyaps.dao.WantToHelpDAO;
+import com.wordpress.ilyaps.servlets.ServletHelper;
 
 import javax.persistence.*;
 import java.util.List;
@@ -73,5 +75,13 @@ public class Task {
 
     public List<WantToHelp> getListWantToHelps() {
         return WantToHelpDAO.findByTaskId(this);
+    }
+
+    public void addWantToHelp(WantToHelp help) {
+        help.setTask(this);
+        WantToHelpDAO.insert(help);
+
+        this.incCountWantToHelp();
+        TaskDAO.update(this);
     }
 }
