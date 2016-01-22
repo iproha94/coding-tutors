@@ -5,6 +5,7 @@ import com.wordpress.ilyaps.dao.WantToHelpDAO;
 import com.wordpress.ilyaps.servlets.ServletHelper;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -28,6 +29,16 @@ public class Task {
     private boolean isOpen = true;
     @Column(name = "COUNTWANTTOHELP")
     private int countWantToHelp = 0;
+    @Column(name = "DATETIME_FIELD")
+    private java.sql.Timestamp dateTimeField;
+
+    public Timestamp getDateTimeField() {
+        return dateTimeField;
+    }
+
+    public void setDateTimeField(Timestamp dateTimeField) {
+        this.dateTimeField = dateTimeField;
+    }
 
     public int getCountWantToHelp() {
         return countWantToHelp;

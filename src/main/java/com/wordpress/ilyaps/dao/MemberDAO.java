@@ -14,6 +14,19 @@ import javax.persistence.EntityManager;
 public class MemberDAO extends BaseDAO {
     private static final Logger LOGGER = Logger.getLogger(MemberDAO.class);
 
+    public static void drop() {
+        EntityManager em = DBService.getInstance().getEm();
+
+        try {
+            em.getTransaction().begin();
+            em.createQuery("DELETE FROM Member e").executeUpdate();
+        } catch (Exception e) {
+            LOGGER.warn("drop", e);
+        } finally {
+            em.getTransaction().commit();
+        }
+    }
+
     @Nullable
     public static Member find(String email, int hashPassword) {
         Member member = find(email);

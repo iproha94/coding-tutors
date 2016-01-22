@@ -18,6 +18,19 @@ import java.util.List;
 public class WantToHelpDAO extends BaseDAO {
     private static final Logger LOGGER = Logger.getLogger(WantToHelpDAO.class);
 
+    public static void drop() {
+        EntityManager em = DBService.getInstance().getEm();
+
+        try {
+            em.getTransaction().begin();
+            em.createQuery("DELETE FROM WantToHelp e").executeUpdate();
+        } catch (Exception e) {
+            LOGGER.warn("drop", e);
+        } finally {
+            em.getTransaction().commit();
+        }
+    }
+
     @NotNull
     public static List<WantToHelp> findByTaskId(Task task) {
         EntityManager em = DBService.getInstance().getEm();

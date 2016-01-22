@@ -27,7 +27,7 @@
                 </span></a></li>
                 <li><a href="create-task.jsp"><span class="glyphicon glyphicon-new-window" > Создать задачу</span></a></li>
                 <li><a href="list-my-tasks.jsp"><span class="glyphicon glyphicon-th-list" > Мои задачи</span></a></li>
-                <li><a href="list-tasks.jsp"><span class="glyphicon glyphicon-list" > Все задачи</span></a></li>
+                <li><a href="list-tasks.jsp?start=0"><span class="glyphicon glyphicon-list" > Все задачи</span></a></li>
                 <li><a href="logout"><span class="glyphicon glyphicon-log-out " > Выход</span></a></li>
                 <%
                 } else {

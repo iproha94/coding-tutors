@@ -72,7 +72,7 @@ public class Member {
 
     @NotNull
     public List<Task> getListMyTasks() {
-        return TaskDAO.findTasksByEmailCreator(email);
+        return TaskDAO.findTasksByMemberNeed(this);
     }
 
     public String getMyNoteForTask(Task task) {
