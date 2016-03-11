@@ -25,6 +25,12 @@ public class Member {
     private String surname;
     @Column(name = "UNIVERSITYSHORTNAME")
     private String universityShortName;
+    @Column(name = "LIKES")
+    private int likes = 0;
+
+    public void setLikes(int likes) {
+        this.likes = likes;
+    }
 
     public Member() {
 //        memberId = 0;
@@ -68,6 +74,14 @@ public class Member {
 
     public String getSurname() {
         return surname;
+    }
+
+    public int getLikes() {
+        return likes;
+    }
+
+    public void incLikes() {
+        likes++;
     }
 
     @NotNull

@@ -1,10 +1,4 @@
-<%@ page import="com.wordpress.ilyaps.models.Member" %><%--
-  Created by IntelliJ IDEA.
-  User: ilyap
-  Date: 21.01.2016
-  Time: 17:05
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="com.wordpress.ilyaps.models.Member" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <style>
@@ -33,7 +27,7 @@
                 %>
                 <li ><a href="edit-profile.jsp"><span class="glyphicon glyphicon-user" aria-hidden="true">
                 <%
-                    out.print(((Member) request.getSession().getAttribute("member")).getFullname());
+                    out.print(( (Member) request.getSession().getAttribute("member")).getFullname());
                 %>
                 </span></a></li>
                 <li><a href="create-task.jsp"><span class="glyphicon glyphicon-new-window" > Создать задачу</span></a></li>

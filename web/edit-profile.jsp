@@ -1,5 +1,6 @@
 <%@ page import="com.wordpress.ilyaps.models.Member" %>
 <%@ page import="com.wordpress.ilyaps.models.University" %>
+<%@ page import="com.wordpress.ilyaps.dao.UniversityDAO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -37,17 +38,23 @@
 
             <br>
             <div class="input-group input-group-lg">
+                <span class="input-group-addon">likes</span>
+                <input type="text" class="form-control" aria-describedby="sizing-addon1" name="likes" readonly value = "<% out.print(member.getLikes()); %>">
+            </div>
+
+            <br>
+            <div class="input-group input-group-lg">
                 <span class="input-group-addon">University</span>
                 <select class="form-control" id="sel1"  name="university" >
                     <%
-                        for (String university : University.getSet()) {
+                        for (String university : UniversityDAO.getSet()) {
                     %>
                     <option <%
                         if (member.getUniversityShortName().equals(university)) {
                             out.print("selected");
                         }
                     %> value = '<% out.print(university); %>'>
-                        <% out.print(University.getMap().get(university)); %>
+                        <% out.print(UniversityDAO.getMap().get(university)); %>
                     </option>
                     <%
                         }

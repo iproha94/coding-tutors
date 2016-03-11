@@ -1,7 +1,9 @@
 package com.wordpress.ilyaps.servlets;
 
 import com.wordpress.ilyaps.dao.BaseDAO;
+import com.wordpress.ilyaps.dao.MemberDAO;
 import com.wordpress.ilyaps.dao.TaskDAO;
+import com.wordpress.ilyaps.models.Member;
 import com.wordpress.ilyaps.models.Task;
 
 import javax.servlet.ServletException;
@@ -12,17 +14,17 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * Created by ilyap on 22.01.2016.
+ * Created by ilyaps on 11.03.16.
  */
-public class CloseTaskServlet extends HttpServlet {
+public class LikeHelperServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter pw = response.getWriter();
         response.setContentType("text/html");
 
-        int taskId = new Integer(request.getParameter("task-id"));
-        Task task = (Task) BaseDAO.find(Task.class, taskId);
-        task.setOpen(false);
-        TaskDAO.update(task);
+        String emailHelper = request.getParameter("email");
+        Member member = (Member) BaseDAO.find(Member.class, emailHelper);
+        member.incLikes();
+        MemberDAO.update(member);
 
         pw.println(ServletHelper.SUCCESSFUL);
         pw.println(ServletHelper.getHtmlRedirect("list-my-tasks.jsp"));

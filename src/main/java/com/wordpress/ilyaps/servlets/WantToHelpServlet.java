@@ -1,6 +1,7 @@
 package com.wordpress.ilyaps.servlets;
 
 import com.wordpress.ilyaps.Logic.Compliance;
+import com.wordpress.ilyaps.dao.BaseDAO;
 import com.wordpress.ilyaps.dao.MemberDAO;
 import com.wordpress.ilyaps.dao.TaskDAO;
 import com.wordpress.ilyaps.dao.WantToHelpDAO;
@@ -36,15 +37,15 @@ public class WantToHelpServlet extends HttpServlet {
         wantToHelp.setNote(request.getParameter("note"));
 
         int taskId = new Integer(request.getParameter("task-id"));
-        Task task =TaskDAO.find(taskId);
+        Task task =(Task) BaseDAO.find(Task.class, taskId);
 
         String memberHelperEmail = request.getParameter("member-email");
-        Member helper = MemberDAO.find(memberHelperEmail);
+        Member helper = (Member) BaseDAO.find(Member.class, memberHelperEmail);
         wantToHelp.setMemberHelper(helper);
 
         Member need = task.getMemberNeed();
 
-        wantToHelp.setLevelOfCompliance(Compliance.getComplianceMembers(need, helper));
+        wantToHelp.setLevelOfCompliance(Compliance.getComplianceMembers(need, helper) + helper.getLikes());
 
         task.addWantToHelp(wantToHelp);
 

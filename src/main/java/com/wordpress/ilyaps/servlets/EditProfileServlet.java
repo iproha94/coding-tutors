@@ -35,6 +35,7 @@ public class EditProfileServlet extends HttpServlet {
         member.setEmail(request.getParameter("email"));
         member.setHashPassword(oldMember.getHashPassword());
         member.setUniversityShortName(request.getParameter("university"));
+        member.setLikes(new Integer(request.getParameter("likes")));
 
         if (!MemberDAO.update(member)) {
             pw.println(ServletHelper.ERROR);

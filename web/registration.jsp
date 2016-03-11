@@ -1,4 +1,5 @@
 <%@ page import="com.wordpress.ilyaps.models.University" %>
+<%@ page import="com.wordpress.ilyaps.dao.UniversityDAO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -45,10 +46,10 @@
                 <span class="input-group-addon">University</span>
                 <select class="form-control" id="sel1"  name="university" >
                     <%
-                        for (String university : University.getSet()) {
+                        for (String university : UniversityDAO.getSet()) {
                     %>
                     <option value = '<% out.print(university); %>'>
-                        <% out.print(University.getMap().get(university)); %>
+                        <% out.print(UniversityDAO.getMap().get(university)); %>
                     </option>
                     <%
                         }

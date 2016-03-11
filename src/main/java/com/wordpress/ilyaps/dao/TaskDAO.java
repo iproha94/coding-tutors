@@ -17,21 +17,6 @@ import java.util.List;
 public class TaskDAO extends BaseDAO {
     private static final Logger LOGGER = Logger.getLogger(TaskDAO.class);
 
-
-
-    public static void drop() {
-        EntityManager em = DBService.getInstance().getEm();
-
-        try {
-            em.getTransaction().begin();
-            em.createQuery("DELETE FROM Task e").executeUpdate();
-        } catch (Exception e) {
-            LOGGER.warn("drop", e);
-        } finally {
-            em.getTransaction().commit();
-        }
-    }
-
     @NotNull
     public static List<Task> findAllOpen(int start, int count) {
         EntityManager em = DBService.getInstance().getEm();
@@ -75,41 +60,6 @@ public class TaskDAO extends BaseDAO {
         }
 
         return tasks != null ? tasks : new ArrayList<>(0);
-    }
-
-    @Nullable
-    public static Task find(int taskId) {
-        EntityManager em = DBService.getInstance().getEm();
-
-        Task task = null;
-        try {
-            em.getTransaction().begin();
-            task = em.find(Task.class, taskId);
-        } catch (Exception e) {
-            LOGGER.warn("find", e);
-        } finally {
-            em.getTransaction().commit();
-        }
-
-        return task;
-    }
-
-    @Nullable
-    public static long count() {
-        EntityManager em = DBService.getInstance().getEm();
-
-        long count = 0;
-        try {
-            em.getTransaction().begin();
-            count = em.createQuery("SELECT count(t) FROM Task t", Long.class)
-                    .getSingleResult();
-        } catch (Exception e) {
-            LOGGER.warn("count", e);
-        } finally {
-            em.getTransaction().commit();
-        }
-
-        return count;
     }
 
     @Nullable

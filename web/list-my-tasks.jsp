@@ -57,14 +57,19 @@
             <% List<WantToHelp> helps = task.getListWantToHelps(); %>
 
             <% if (helps.size() > 0) { %>
-                <tr><th>email</th><th>соответствие</th><th>note</th></tr>
+                <tr><th>поблагодарить</th><th>email</th><th>соответствие</th><th>note</th></tr>
             <% } %>
 
             <% for (WantToHelp help : helps) { %>
             <tr>
-                <td width="15%"><%= help.getMemberHelper().getEmail() %></td>
-                <td width="5%"><%= help.getLevelOfCompliance() %></td>
-                <td><%= help.getNote() %></td>
+                <form action="like-helper" method="post">
+                    <td width="5%"><button class="btn btn-primary" type="submit">like</button></td>
+                    <td width="15%"><%= help.getMemberHelper().getEmail() %></td>
+                    <td width="5%"><%= help.getLevelOfCompliance() %></td>
+                    <td><%= help.getNote() %></td>
+
+                    <input type="hidden"  name = "email" value = "<%= help.getMemberHelper().getEmail() %>">
+                </form>
             </tr>
             <%}%>
         </table>

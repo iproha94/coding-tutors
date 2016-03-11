@@ -1,9 +1,7 @@
 package com.wordpress.ilyaps.services;
 
 import com.wordpress.ilyaps.Logic.Compliance;
-import com.wordpress.ilyaps.dao.MemberDAO;
-import com.wordpress.ilyaps.dao.TaskDAO;
-import com.wordpress.ilyaps.dao.WantToHelpDAO;
+import com.wordpress.ilyaps.dao.*;
 import com.wordpress.ilyaps.models.Member;
 import com.wordpress.ilyaps.models.Task;
 import com.wordpress.ilyaps.models.University;
@@ -20,13 +18,15 @@ import java.util.Random;
  */
 public class AutoFill {
     static long offset = Timestamp.valueOf("2014-01-01 00:00:00").getTime();
-    static long end = Timestamp.valueOf("2016-01-22 00:00:00").getTime();
+    static long end = Timestamp.valueOf("2016-03-10 00:00:00").getTime();
     static long diff = end - offset + 1;
 
     public static void main(String[] args) {
-        WantToHelpDAO.drop();
-        TaskDAO.drop();
-        MemberDAO.drop();
+
+        BaseDAO.drop(WantToHelp.class);
+        BaseDAO.drop(Task.class);
+        BaseDAO.drop(Member.class);
+        BaseDAO.drop(University.class);
 
         List<String> firstnames = new ArrayList<>(Arrays.asList("Ilya", "Inna", "Andrey", "Timur", "Jenya", "Dima", "Pavel"));
         List<String> surnames = new ArrayList<>(Arrays.asList("Petukhov", "Provorova", "Savchenko", "Arshavin", "Pavelko", "Tsiganov", "Ivanov"));
@@ -43,7 +43,16 @@ public class AutoFill {
         Random random = new Random();
         int maxMembers = 10 + random.nextInt(20);
         int maxTasks = 100 + random.nextInt(200);
-        List<String> listUniversity = new ArrayList<String>(University.getSet());
+
+        University university1 = new University("bmstu", "МГТУ");
+        University university2 = new University("msu", "МГУ");
+        University university3 = new University("spbu", "СПБГУ");
+
+        BaseDAO.insert(university1);
+        BaseDAO.insert(university2);
+        BaseDAO.insert(university3);
+
+        List<String> listUniversity = new ArrayList<String>(UniversityDAO.getSet());
 
         List<Member> members = new ArrayList<>();
         for (int i = 0; i < maxMembers; ++i) {
@@ -55,6 +64,7 @@ public class AutoFill {
             member.setFirstname(firstname);
             member.setUniversityShortName(listUniversity.get(random.nextInt(listUniversity.size())));
             member.setHashPassword(passwords.get(random.nextInt(passwords.size())));
+            member.setLikes(random.nextInt(10));
 
             members.add(member);
             MemberDAO.insert(member);

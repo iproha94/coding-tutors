@@ -3,6 +3,7 @@
 <%@ page import="java.sql.Timestamp" %>
 <%@ page import="java.util.Date" %>
 <%@ page import="java.util.concurrent.TimeUnit" %>
+<%@ page import="com.wordpress.ilyaps.dao.BaseDAO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -17,7 +18,7 @@
 <% Member member = (Member) request.getSession().getAttribute("member"); %>
 
     <div class="container">
-        <h2 class="form-heading">List all tasks (<%=TaskDAO.count()%>)</h2>
+        <h2 class="form-heading">List all tasks (<%=BaseDAO.count(Task.class)%>)</h2>
         <% int start = request.getParameter("start") != null ? new Integer(request.getParameter("start")) : 0; %>
         <nav>
             <ul class="pager">

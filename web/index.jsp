@@ -1,10 +1,3 @@
-<%@ page import="com.wordpress.ilyaps.models.Member" %><%--
-  Created by IntelliJ IDEA.
-  User: ilyap
-  Date: 24.12.2015
-  Time: 11:02
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -19,6 +12,6 @@
 <%@include file='top.jsp' %>
 
 <img src="images/dzen.png" width="100%">
-
+hello
 </body>
 </html>
