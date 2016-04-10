@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <html>
 <head>
-    <title>create task</title>
+    <title>add book</title>
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
@@ -18,9 +18,8 @@
 <body>
 <%@include file='top.jsp' %>
 <div class="container">
-    <form action="create-task" method="post" class="form-signup">
-        <h2 class="form-signup-heading">Fill out the task form</h2>
-
+    <form action="add-book" method="post" class="form-signup">
+        <h2 class="form-signup-heading">Fill out the book form</h2>
 
         <br>
         <div class="input-group input-group-lg">
@@ -30,8 +29,8 @@
 
         <br>
         <div class="input-group input-group-lg">
-            <span class="input-group-addon">text</span>
-            <input type="text" class="form-control" aria-describedby="sizing-addon1" name="text" >
+            <span class="input-group-addon">author</span>
+            <input type="text" class="form-control" aria-describedby="sizing-addon1" name="author" >
         </div>
 
         <br>
@@ -51,7 +50,7 @@
         </div>
 
         <br>
-        <button class="btn btn-large btn-primary" type="submit">Create task</button>
+        <button class="btn btn-large btn-primary" type="submit">Add book</button>
     </form>
 </div>
 

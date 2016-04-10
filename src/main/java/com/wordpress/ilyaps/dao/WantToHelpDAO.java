@@ -59,4 +59,12 @@ public class WantToHelpDAO extends BaseDAO {
         return wantToHelp != null ? wantToHelp.getNote() : null ;
     }
 
+    public static void addWantToHelp(Task task, WantToHelp help) {
+        help.setTask(task);
+        WantToHelpDAO.insert(help);
+
+        task.incCountWantToHelp();
+        TaskDAO.update(task);
+    }
+
 }

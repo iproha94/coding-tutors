@@ -2,9 +2,6 @@ package com.wordpress.ilyaps.models;
 
 import javax.persistence.*;
 
-/**
- * Created by ilyap on 25.12.2015.
- */
 @Entity
 @Table(name = "WANTTOHELPS")
 public class WantToHelp {

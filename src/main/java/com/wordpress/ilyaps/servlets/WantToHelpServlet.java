@@ -1,9 +1,7 @@
 package com.wordpress.ilyaps.servlets;
 
-import com.wordpress.ilyaps.Logic.Compliance;
+import com.wordpress.ilyaps.logic.Compliance;
 import com.wordpress.ilyaps.dao.BaseDAO;
-import com.wordpress.ilyaps.dao.MemberDAO;
-import com.wordpress.ilyaps.dao.TaskDAO;
 import com.wordpress.ilyaps.dao.WantToHelpDAO;
 import com.wordpress.ilyaps.models.Member;
 import com.wordpress.ilyaps.models.Task;
@@ -47,7 +45,8 @@ public class WantToHelpServlet extends HttpServlet {
 
         wantToHelp.setLevelOfCompliance(Compliance.getComplianceMembers(need, helper) + helper.getLikes());
 
-        task.addWantToHelp(wantToHelp);
+
+        WantToHelpDAO.addWantToHelp(task, wantToHelp);
 
         pw.println(ServletHelper.SUCCESSFUL);
         pw.println(ServletHelper.getHtmlRedirect("list-tasks.jsp"));

@@ -1,11 +1,9 @@
-package com.wordpress.ilyaps.services;
+package com.wordpress.ilyaps;
 
-import com.wordpress.ilyaps.Logic.Compliance;
+
+import com.wordpress.ilyaps.logic.Compliance;
 import com.wordpress.ilyaps.dao.*;
-import com.wordpress.ilyaps.models.Member;
-import com.wordpress.ilyaps.models.Task;
-import com.wordpress.ilyaps.models.University;
-import com.wordpress.ilyaps.models.WantToHelp;
+import com.wordpress.ilyaps.models.*;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -13,23 +11,22 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-/**
- * Created by ilyap on 22.01.2016.
- */
 public class AutoFill {
-    static long offset = Timestamp.valueOf("2014-01-01 00:00:00").getTime();
-    static long end = Timestamp.valueOf("2016-03-10 00:00:00").getTime();
+    static long offset = Timestamp.valueOf("2016-01-01 00:00:00").getTime();
+    static long end = Timestamp.valueOf("2016-04-10 00:00:00").getTime();
     static long diff = end - offset + 1;
 
     public static void main(String[] args) {
 
+        BaseDAO.drop(Book.class);
         BaseDAO.drop(WantToHelp.class);
         BaseDAO.drop(Task.class);
         BaseDAO.drop(Member.class);
         BaseDAO.drop(University.class);
+        BaseDAO.drop(Category.class);
 
         List<String> firstnames = new ArrayList<>(Arrays.asList("Ilya", "Inna", "Andrey", "Timur", "Jenya", "Dima", "Pavel"));
-        List<String> surnames = new ArrayList<>(Arrays.asList("Petukhov", "Provorova", "Savchenko", "Arshavin", "Pavelko", "Tsiganov", "Ivanov"));
+        List<String> surnames = new ArrayList<>(Arrays.asList("Petukhov", "Provorova", "Savchenko", "Arshavin", "Putin", "Tsiganov", "Ivanov"));
         List<String> emaildomens = new ArrayList<>(Arrays.asList("@mail.ru", "@yandex.ru", "@gmail.com"));
         List<Integer> passwords = new ArrayList<>(Arrays.asList("12345".hashCode(), "1234".hashCode()));
 
@@ -44,15 +41,30 @@ public class AutoFill {
         int maxMembers = 10 + random.nextInt(20);
         int maxTasks = 100 + random.nextInt(200);
 
-        University university1 = new University("bmstu", "МГТУ");
-        University university2 = new University("msu", "МГУ");
-        University university3 = new University("spbu", "СПБГУ");
+        BaseDAO.insert(new University("bmstu", "МГТУ"));
+        BaseDAO.insert(new University("msu", "МГУ"));
+        BaseDAO.insert(new University("spbu", "СПБГУ"));
+        BaseDAO.insert(new University("rsuh", "РГГУ"));
 
-        BaseDAO.insert(university1);
-        BaseDAO.insert(university2);
-        BaseDAO.insert(university3);
+        List<String> listUniversity = new ArrayList<>(UniversityDAO.getSet());
 
-        List<String> listUniversity = new ArrayList<String>(UniversityDAO.getSet());
+        BaseDAO.insert(new Category("empty"));
+        BaseDAO.insert(new Category("Algorithms"));
+        BaseDAO.insert(new Category("Structured"));
+        BaseDAO.insert(new Category("OOP"));
+        BaseDAO.insert(new Category("Front-end"));
+        BaseDAO.insert(new Category("Back-end"));
+        BaseDAO.insert(new Category("Database"));
+
+        List<Category> listCategory = new ArrayList<>(CategoryDAO.findAll());
+
+        BaseDAO.insert(new Book("ООАиП", "Гради Буч", listCategory.get(random.nextInt(listCategory.size()))));
+        BaseDAO.insert(new Book("Современные операционные системы", "Таненбаум", listCategory.get(random.nextInt(listCategory.size()))));
+        BaseDAO.insert(new Book("Архитектура ЭВМ", "Таненбаум", listCategory.get(random.nextInt(listCategory.size()))));
+        BaseDAO.insert(new Book("Паттерны проектирования", "Банда 4-х", listCategory.get(random.nextInt(listCategory.size()))));
+        BaseDAO.insert(new Book("Unix проф программирование", "Стивен Раго", listCategory.get(random.nextInt(listCategory.size()))));
+        BaseDAO.insert(new Book("Скала для нетерпеливых", "Хорстман", listCategory.get(random.nextInt(listCategory.size()))));
+        BaseDAO.insert(new Book("Язык программирования go", "Керниган", listCategory.get(random.nextInt(listCategory.size()))));
 
         List<Member> members = new ArrayList<>();
         for (int i = 0; i < maxMembers; ++i) {
@@ -83,13 +95,14 @@ public class AutoFill {
                 text =  text22.get(random.nextInt(text22.size())) + (random.nextInt(1000) - 100) + " " + (random.nextInt(1000) + 100);
             }
 
+            task.setCategory(listCategory.get(random.nextInt(listCategory.size())));
             task.setText(text1.get(random.nextInt(text1.size())) + text);
             task.setDateTimeField(new Timestamp(offset + (long)(Math.random() * diff)));
             TaskDAO.insert(task);
             tasks.add(task);
         }
 
-        List<String> notes = new ArrayList<>(Arrays.asList("еду", "деньги", " только за доллары", "евро", "поцелуй", "бесплтно"));
+        List<String> notes = new ArrayList<>(Arrays.asList("еду", "деньги", " только доллары", "евро", "поцелуй", "бесплтно"));
         int maxWantToHelp = 300 + random.nextInt(300);
         for (int i = 0; i < maxWantToHelp; ++i) {
             WantToHelp help = new WantToHelp();
@@ -102,7 +115,7 @@ public class AutoFill {
             help.setNote("Это легко, помогу за  " + notes.get(random.nextInt(notes.size())));
             help.setLevelOfCompliance(Compliance.getComplianceMembers(helper, need));
 
-            task.addWantToHelp(help);
+            WantToHelpDAO.addWantToHelp(task, help);
         }
 
 

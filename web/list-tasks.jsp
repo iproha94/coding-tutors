@@ -1,9 +1,11 @@
 <%@ page import="com.wordpress.ilyaps.dao.TaskDAO" %>
 <%@ page import="com.wordpress.ilyaps.models.Task" %>
-<%@ page import="java.sql.Timestamp" %>
 <%@ page import="java.util.Date" %>
 <%@ page import="java.util.concurrent.TimeUnit" %>
 <%@ page import="com.wordpress.ilyaps.dao.BaseDAO" %>
+<%@ page import="com.wordpress.ilyaps.dao.WantToHelpDAO" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.wordpress.ilyaps.models.Category" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -15,11 +17,17 @@
 </head>
 <body>
 <%@include file='top.jsp' %>
-<% Member member = (Member) request.getSession().getAttribute("member"); %>
+<% Member member = (Member) request.getSession().getAttribute("member");
+    int start = request.getParameter("start") != null ? new Integer(request.getParameter("start")) : 0;
+
+    int catId = new Integer((String) request.getSession().getAttribute("category"));
+    Category category = (Category) BaseDAO.find(Category.class, catId);
+
+    List<Task> tasks = TaskDAO.findOpenByCategory(category, start, 10);
+%>
 
     <div class="container">
-        <h2 class="form-heading">List all tasks (<%=BaseDAO.count(Task.class)%>)</h2>
-        <% int start = request.getParameter("start") != null ? new Integer(request.getParameter("start")) : 0; %>
+        <h2 class="form-heading">List tasks </h2>
         <nav>
             <ul class="pager">
                 <li class="previous"><a href="list-tasks.jsp?start=<%=start - 10%>"><span aria-hidden="true">&larr;</span> Older</a></li>
@@ -27,12 +35,13 @@
             </ul>
         </nav>
 
-        <% for (Task task : TaskDAO.findAllOpen(start, 10)) {
+        <%
+            for (Task task : tasks) {
             if (!task.getMemberNeed().getEmail().equals(member.getEmail())) {%>
                 <div class="panel panel-success">
 
                     <div class="panel-heading">
-                        <%= "#" + task.getTaskId() + " | " + task.getTitle() %>
+                        <%= "#" + task.getTaskId() + " | " + task.getTitle() + " | " + task.getCategory().getName() %>
                     </div>
 
                     <div class="panel-body">
@@ -41,7 +50,7 @@
 
                     <form action="want-to-help" method="post">
                         <div class=" input-group panel-body">
-                            <% String comment = member.getMyNoteForTask(task); %>
+                            <% String comment = WantToHelpDAO.getNoteForTaskByEmail(task, member); %>
                             <% if (comment == null) { %>
                             <span class="input-group-btn">
                                 <button class="btn btn-success " type="submit">Помочь!</button>

@@ -1,4 +1,4 @@
-package com.wordpress.ilyaps.Logic;
+package com.wordpress.ilyaps.logic;
 
 import com.wordpress.ilyaps.models.Member;
 

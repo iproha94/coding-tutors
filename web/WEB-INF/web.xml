@@ -45,6 +45,16 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>AddBook</servlet-name>
+        <servlet-class>com.wordpress.ilyaps.servlets.AddBookServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddBook</servlet-name>
+        <url-pattern>/add-book</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>WantToHelp</servlet-name>
         <servlet-class>com.wordpress.ilyaps.servlets.WantToHelpServlet</servlet-class>
     </servlet>
@@ -76,6 +86,16 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>LikeBook</servlet-name>
+        <servlet-class>com.wordpress.ilyaps.servlets.LikeBookServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>LikeBook</servlet-name>
+        <url-pattern>/like-book</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>Logout</servlet-name>
         <servlet-class>com.wordpress.ilyaps.servlets.LogoutServlet</servlet-class>
     </servlet>
@@ -85,4 +105,33 @@
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>Search</servlet-name>
+        <servlet-class>com.wordpress.ilyaps.servlets.SearchServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Search</servlet-name>
+        <url-pattern>/search</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Category</servlet-name>
+        <servlet-class>com.wordpress.ilyaps.servlets.CategoryServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Category</servlet-name>
+        <url-pattern>/category</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Library</servlet-name>
+        <servlet-class>com.wordpress.ilyaps.servlets.LibraryServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Library</servlet-name>
+        <url-pattern>/library</url-pattern>
+    </servlet-mapping>
 </web-app>

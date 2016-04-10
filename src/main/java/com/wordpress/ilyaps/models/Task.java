@@ -21,6 +21,9 @@ public class Task {
     @ManyToOne
     @JoinColumn(name = "MEMBEREMAIL")
     private Member memberNeed;
+    @ManyToOne
+    @JoinColumn(name = "CATEGORYID")
+    private Category category;
     @Column(name = "TITLE")
     private String title;
     @Column(name = "TEXT")
@@ -84,15 +87,11 @@ public class Task {
         isOpen = open;
     }
 
-    public List<WantToHelp> getListWantToHelps() {
-        return WantToHelpDAO.findByTaskId(this);
+    public Category getCategory() {
+        return category;
     }
 
-    public void addWantToHelp(WantToHelp help) {
-        help.setTask(this);
-        WantToHelpDAO.insert(help);
-
-        this.incCountWantToHelp();
-        TaskDAO.update(this);
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }

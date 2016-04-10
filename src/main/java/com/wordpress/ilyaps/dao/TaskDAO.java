@@ -2,6 +2,7 @@ package com.wordpress.ilyaps.dao;
 
 import com.sun.istack.internal.NotNull;
 import com.sun.istack.internal.Nullable;
+import com.wordpress.ilyaps.models.Category;
 import com.wordpress.ilyaps.models.Member;
 import com.wordpress.ilyaps.models.Task;
 import com.wordpress.ilyaps.services.DBService;
@@ -16,6 +17,36 @@ import java.util.List;
  */
 public class TaskDAO extends BaseDAO {
     private static final Logger LOGGER = Logger.getLogger(TaskDAO.class);
+
+    @NotNull
+    public static List<Task> findOpenByCategory(Category category, int start, int count) {
+        EntityManager em = DBService.getInstance().getEm();
+
+        List<Task> tasks = null;
+
+        if (start < 0) {
+            start = 0;
+        }
+
+        try {
+            em.getTransaction().begin();
+            tasks = em.createQuery("SELECT t FROM Task t " +
+                    "where t.isOpen = :value1 and t.category = :value2 " +
+                    "ORDER BY t.dateTimeField desc")
+                    .setFirstResult(start)
+                    .setMaxResults(count)
+                    .setParameter("value2", category)
+                    .setParameter("value1", true)
+                    .getResultList();
+
+        } catch (Exception e) {
+            LOGGER.warn("findOpenByCategory", e);
+        }finally {
+            em.getTransaction().commit();
+        }
+
+        return tasks != null ? tasks : new ArrayList<>(0);
+    }
 
     @NotNull
     public static List<Task> findAllOpen(int start, int count) {
@@ -79,5 +110,30 @@ public class TaskDAO extends BaseDAO {
         }
 
         return count;
+    }
+
+    public static List<Task> search(String search_text, int start, int count) {
+        EntityManager em = DBService.getInstance().getEm();
+
+        List<Task> tasks = null;
+
+        if (start < 0) {
+            start = 0;
+        }
+
+        try {
+            em.getTransaction().begin();
+            tasks = em.createQuery("SELECT t FROM Task t where t.text like :value1 or t.title like :value1")
+                    .setFirstResult(start)
+                    .setMaxResults(count)
+                    .setParameter("value1", "%" + search_text + "%").getResultList();
+
+        } catch (Exception e) {
+            LOGGER.warn("search", e);
+        } finally {
+            em.getTransaction().commit();
+        }
+
+        return tasks != null ? tasks : new ArrayList<>(0);
     }
 }

@@ -26,6 +26,7 @@ public class University {
     public University() {
     }
 
+
     public String getShortName() {
         return shortName;
     }

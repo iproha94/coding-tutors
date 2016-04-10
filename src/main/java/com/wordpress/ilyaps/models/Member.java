@@ -1,15 +1,6 @@
 package com.wordpress.ilyaps.models;
 
-import com.sun.istack.internal.NotNull;
-import com.wordpress.ilyaps.dao.TaskDAO;
-import com.wordpress.ilyaps.dao.WantToHelpDAO;
-
 import javax.persistence.*;
-import java.util.List;
-
-/**
- * Created by ilyap on 25.12.2015.
- */
 
 @Entity
 @Table(name = "MEMBERS")
@@ -30,10 +21,6 @@ public class Member {
 
     public void setLikes(int likes) {
         this.likes = likes;
-    }
-
-    public Member() {
-//        memberId = 0;
     }
 
     public String getUniversityShortName() {
@@ -82,15 +69,6 @@ public class Member {
 
     public void incLikes() {
         likes++;
-    }
-
-    @NotNull
-    public List<Task> getListMyTasks() {
-        return TaskDAO.findTasksByMemberNeed(this);
-    }
-
-    public String getMyNoteForTask(Task task) {
-        return WantToHelpDAO.getNoteForTaskByEmail(task, this);
     }
 
     @Override

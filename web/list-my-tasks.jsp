@@ -39,14 +39,17 @@
 <body>
 <%@include file='top.jsp' %>
 
-<% Member member = (Member) request.getSession().getAttribute("member"); %>
+<%
+    Member member = (Member) request.getSession().getAttribute("member");
+    List<Task> tasks = TaskDAO.findTasksByMemberNeed(member);
+%>
 <div class="container">
-    <h2 class="form-heading">List my tasks (<%= TaskDAO.countByMember(member)%>)</h2>
-    <% for (Task task : member.getListMyTasks()) {%>
+    <h2 class="form-heading">List my tasks (<%= tasks.size() %>)</h2>
+    <% for (Task task : tasks) {%>
     <div class="panel <% out.print(task.isOpen() ? "panel-success" : "panel-danger"); %>" >
 
         <div class="panel-heading">
-                <%= task.getTitle() %>
+                <%= task.getTitle() + " | " + task.getCategory().getName()%>
         </div>
 
         <div class="panel-body">
@@ -54,7 +57,7 @@
         </div>
 
         <table class="table">
-            <% List<WantToHelp> helps = task.getListWantToHelps(); %>
+            <% List<WantToHelp> helps =  WantToHelpDAO.findByTaskId(task); %>
 
             <% if (helps.size() > 0) { %>
                 <tr><th>поблагодарить</th><th>email</th><th>соответствие</th><th>note</th></tr>

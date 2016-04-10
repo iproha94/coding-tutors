@@ -1,7 +1,9 @@
 package com.wordpress.ilyaps.servlets;
 
+import com.wordpress.ilyaps.dao.BookDAO;
 import com.wordpress.ilyaps.dao.CategoryDAO;
 import com.wordpress.ilyaps.dao.TaskDAO;
+import com.wordpress.ilyaps.models.Book;
 import com.wordpress.ilyaps.models.Member;
 import com.wordpress.ilyaps.models.Task;
 
@@ -15,9 +17,9 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 /**
- * Created by ilyap on 21.01.2016.
+ * Created by ilyaps on 10.04.16.
  */
-public class CreateTaskServlet extends HttpServlet {
+public class AddBookServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter pw = response.getWriter();
@@ -30,23 +32,19 @@ public class CreateTaskServlet extends HttpServlet {
             return;
         }
 
-        Task task = new Task();
-        Member member = (Member) request.getSession().getAttribute("member");
+        Book book = new Book();
+        book.setAuthor(request.getParameter("author"));
+        book.setTitle(request.getParameter("title"));
+        book.setCategory(CategoryDAO.getMap().get(new Integer(request.getParameter("category"))));
 
-        task.setMemberNeed(member);
-        task.setText(request.getParameter("text"));
-        task.setTitle(request.getParameter("title"));
-        task.setCategory(CategoryDAO.getMap().get(new Integer(request.getParameter("category"))));
-        task.setDateTimeField(new Timestamp(new Date().getTime()));
-
-        if (!TaskDAO.insert(task)) {
+        if (!BookDAO.insert(book)) {
             pw.println(ServletHelper.ERROR);
-            pw.println(ServletHelper.getHtmlRedirect("/create-task.jsp"));
+            pw.println(ServletHelper.getHtmlRedirect("/add-book.jsp"));
             return;
         }
 
         pw.println(ServletHelper.SUCCESSFUL);
-        pw.println(ServletHelper.getHtmlRedirect("/list-my-tasks.jsp"));
+        pw.println(ServletHelper.getHtmlRedirect("/list-category.jsp"));
     }
 
     boolean verificationParametersInRequest(HttpServletRequest request) {
@@ -54,11 +52,10 @@ public class CreateTaskServlet extends HttpServlet {
             return false;
         }
 
-        if (request.getParameter("text").length() < 4) {
+        if (request.getParameter("author").length() < 4) {
             return false;
         }
 
         return true;
     }
-
 }

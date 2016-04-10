@@ -7,8 +7,10 @@
     <persistence-unit name="thePersistenceUnit" transaction-type="RESOURCE_LOCAL">
         <class>com.wordpress.ilyaps.models.Member</class>
         <class>com.wordpress.ilyaps.models.Task</class>
+        <class>com.wordpress.ilyaps.models.Book</class>
         <class>com.wordpress.ilyaps.models.WantToHelp</class>
         <class>com.wordpress.ilyaps.models.University</class>
+        <class>com.wordpress.ilyaps.models.Category</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
