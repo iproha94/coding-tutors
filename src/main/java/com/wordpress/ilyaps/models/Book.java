@@ -1,14 +1,23 @@
 package com.wordpress.ilyaps.models;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-/**
- * Created by ilyap on 25.12.2015.
- */
 @Entity
 @Table(name = "BOOKS")
 public class Book {
+    @Override
+    public String toString() {
+        return "Book{" +
+                "bookId=" + bookId +
+                ", category=" + category +
+                ", title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", likes=" + likes +
+                '}';
+    }
+
     @Id
     @Column(name = "BOOKID")
     @GeneratedValue(strategy = GenerationType.AUTO)

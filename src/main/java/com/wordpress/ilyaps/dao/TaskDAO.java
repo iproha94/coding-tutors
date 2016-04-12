@@ -10,7 +10,9 @@ import org.apache.log4j.Logger;
 
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by ilyap on 25.12.2015.
@@ -112,7 +114,26 @@ public class TaskDAO extends BaseDAO {
         return count;
     }
 
-    public static List<Task> search(String search_text, int start, int count) {
+    public static List<Task> searchByWord(String search_word) {
+        EntityManager em = DBService.getInstance().getEm();
+
+        List<Task> tasks = null;
+
+        try {
+            em.getTransaction().begin();
+            tasks = em.createQuery("SELECT t FROM Task t where t.text like :value1 or t.title like :value1")
+                    .setParameter("value1", "%" + search_word + "%").getResultList();
+
+        } catch (Exception e) {
+            LOGGER.warn("search", e);
+        } finally {
+            em.getTransaction().commit();
+        }
+
+        return tasks != null ? tasks : new ArrayList<>(0);
+    }
+
+    public static List<Task> searchByWord(String search_word, int start, int count) {
         EntityManager em = DBService.getInstance().getEm();
 
         List<Task> tasks = null;
@@ -126,7 +147,7 @@ public class TaskDAO extends BaseDAO {
             tasks = em.createQuery("SELECT t FROM Task t where t.text like :value1 or t.title like :value1")
                     .setFirstResult(start)
                     .setMaxResults(count)
-                    .setParameter("value1", "%" + search_text + "%").getResultList();
+                    .setParameter("value1", "%" + search_word + "%").getResultList();
 
         } catch (Exception e) {
             LOGGER.warn("search", e);
@@ -135,5 +156,19 @@ public class TaskDAO extends BaseDAO {
         }
 
         return tasks != null ? tasks : new ArrayList<>(0);
+    }
+
+    public static Set<Task> search(String search_text, int start, int count) {
+        String[] words = search_text.split(" ");
+
+        Set<Task> set = new HashSet<>();
+
+        for (String word : words) {
+            for (Task task : searchByWord(word)) {
+                set.add(task);
+            }
+        }
+
+        return set;
     }
 }

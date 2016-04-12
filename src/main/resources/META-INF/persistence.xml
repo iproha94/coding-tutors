@@ -11,6 +11,8 @@
         <class>com.wordpress.ilyaps.models.WantToHelp</class>
         <class>com.wordpress.ilyaps.models.University</class>
         <class>com.wordpress.ilyaps.models.Category</class>
+        <class>com.wordpress.ilyaps.models.LikeBook</class>
+        <class>com.wordpress.ilyaps.models.LikeWantToHelp</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />

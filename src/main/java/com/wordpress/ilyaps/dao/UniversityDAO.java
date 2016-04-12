@@ -9,12 +9,8 @@ import org.apache.log4j.Logger;
 import javax.persistence.EntityManager;
 import java.util.*;
 
-/**
- * Created by ilyaps on 11.03.16.
- */
 public class UniversityDAO extends BaseDAO{
     private static final Logger LOGGER = Logger.getLogger(UniversityDAO.class);
-
 
     public static Set<String> getSet() {
         List<University> universitiesList = findAll();

@@ -77,7 +77,7 @@
 
     <servlet>
         <servlet-name>LikeHelper</servlet-name>
-        <servlet-class>com.wordpress.ilyaps.servlets.LikeHelperServlet</servlet-class>
+        <servlet-class>com.wordpress.ilyaps.servlets.LikeWantToHelpServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>

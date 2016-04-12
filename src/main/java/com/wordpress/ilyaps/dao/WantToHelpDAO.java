@@ -9,6 +9,7 @@ import com.wordpress.ilyaps.services.DBService;
 import org.apache.log4j.Logger;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,4 +68,25 @@ public class WantToHelpDAO extends BaseDAO {
         TaskDAO.update(task);
     }
 
+
+    public static WantToHelp findByTaskAndHelper(int taskId, Member helper) {
+        EntityManager em = DBService.getInstance().getEm();
+
+        WantToHelp wantToHelp = null;
+        try {
+            em.getTransaction().begin();
+            wantToHelp = (WantToHelp) em.createQuery("SELECT w FROM WantToHelp w " +
+                    "where w.task.taskId = :value1 and w.memberHelper = :value2 ")
+                    .setParameter("value1", taskId)
+                    .setParameter("value2", helper)
+                    .getSingleResult();
+
+        } catch (Exception e) {
+            LOGGER.warn("existByTaskAndHelper by LikeBookDAO", e);
+        } finally {
+            em.getTransaction().commit();
+        }
+
+        return wantToHelp;
+    }
 }

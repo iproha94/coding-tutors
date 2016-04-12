@@ -1,6 +1,7 @@
 package com.wordpress.ilyaps.models;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "MEMBERS")
@@ -71,18 +72,19 @@ public class Member {
         likes++;
     }
 
+    public String getFullname() {
+        return firstname + " " + surname;
+    }
+
     @Override
     public String toString() {
         return "Member{" +
-                " email='" + email + '\'' +
-                ", password='" + hashPassword + '\'' +
+                "email='" + email + '\'' +
+                ", hashPassword=" + hashPassword +
                 ", firstname='" + firstname + '\'' +
                 ", surname='" + surname + '\'' +
-                ", universityShortName=" + universityShortName +
+                ", universityShortName='" + universityShortName + '\'' +
+                ", likes=" + likes +
                 '}';
-    }
-
-    public String getFullname() {
-        return firstname + " " + surname;
     }
 }

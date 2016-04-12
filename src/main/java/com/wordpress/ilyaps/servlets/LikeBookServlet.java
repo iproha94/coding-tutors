@@ -3,6 +3,7 @@ package com.wordpress.ilyaps.servlets;
 import com.wordpress.ilyaps.dao.BaseDAO;
 import com.wordpress.ilyaps.dao.MemberDAO;
 import com.wordpress.ilyaps.models.Book;
+import com.wordpress.ilyaps.models.LikeBook;
 import com.wordpress.ilyaps.models.Member;
 
 import javax.servlet.ServletException;
@@ -24,6 +25,9 @@ public class LikeBookServlet extends HttpServlet {
         Book book = (Book) BaseDAO.find(Book.class, bookId);
         book.incLikes();
         BaseDAO.update(book);
+
+        Member member = (Member) request.getSession().getAttribute("member");
+        BaseDAO.insert(new LikeBook(member, book));
 
         pw.println(ServletHelper.SUCCESSFUL);
         pw.println(ServletHelper.getHtmlRedirect("list-books.jsp"));

@@ -1,14 +1,9 @@
-<%@ page import="com.wordpress.ilyaps.dao.TaskDAO" %>
-<%@ page import="com.wordpress.ilyaps.models.Task" %>
 <%@ page import="java.sql.Timestamp" %>
 <%@ page import="java.util.Date" %>
 <%@ page import="java.util.concurrent.TimeUnit" %>
-<%@ page import="com.wordpress.ilyaps.dao.BaseDAO" %>
-<%@ page import="com.wordpress.ilyaps.dao.WantToHelpDAO" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.wordpress.ilyaps.models.Category" %>
-<%@ page import="com.wordpress.ilyaps.models.Book" %>
-<%@ page import="com.wordpress.ilyaps.dao.BookDAO" %>
+<%@ page import="com.wordpress.ilyaps.models.*" %>
+<%@ page import="com.wordpress.ilyaps.dao.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -20,7 +15,8 @@
 </head>
 <body>
 <%@include file='top.jsp' %>
-<% Member member = (Member) request.getSession().getAttribute("member");
+<%
+    Member member = (Member) request.getSession().getAttribute("member");
     int catId = new Integer((String) request.getSession().getAttribute("category"));
     Category category = (Category) BaseDAO.find(Category.class, catId);
 
@@ -43,12 +39,14 @@
             </div>
 
             <div class="panel-footer">
+                Likes: <%= book.getLikes() %>
 
+                <% if (!LikeBookDAO.exist(new LikeBook(member, book))) { %>
                 <form action="like-book" method="post">
                     <button class="btn btn-primary" type="submit">like</button>
-                    Likes: <%= book.getLikes() %>
                     <input type="hidden"  name = "book-id" value = "<%= book.getBookId() %>">
                 </form>
+                <% } %>
             </div>
         </div>
 

@@ -5,6 +5,7 @@
 <%@ page import="com.wordpress.ilyaps.dao.WantToHelpDAO" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.wordpress.ilyaps.models.WantToHelp" %>
+<%@ page import="java.util.Set" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -20,7 +21,7 @@
     Member member = (Member) request.getSession().getAttribute("member");
     int start = request.getParameter("start") != null ? new Integer(request.getParameter("start")) : 0;
     String searchText = (String) request.getSession().getAttribute("search_text");
-    List<Task> tasks = TaskDAO.search(searchText, start, 10);
+    Set<Task> tasks = TaskDAO.search(searchText, start, 10);
 %>
 
     <div class="container">
@@ -90,13 +91,6 @@
                 </div>
             </div>
         <%}%>
-
-        <nav>
-            <ul class="pager">
-                <li class="previous"><a href="list-search-tasks.jsp?start=<%=start - 10%>"><span aria-hidden="true">&larr;</span> Older</a></li>
-                <li class="next"><a href="list-search-tasks.jsp?start=<%=start + 10%>">Newer <span aria-hidden="true">&rarr;</span></a></li>
-            </ul>
-        </nav>
     </div>
 </body>
 </html>

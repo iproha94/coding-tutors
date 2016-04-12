@@ -24,6 +24,8 @@ public class AutoFill {
         BaseDAO.drop(Member.class);
         BaseDAO.drop(University.class);
         BaseDAO.drop(Category.class);
+        BaseDAO.drop(LikeBook.class);
+        BaseDAO.drop(LikeWantToHelp.class);
 
         List<String> firstnames = new ArrayList<>(Arrays.asList("Ilya", "Inna", "Andrey", "Timur", "Jenya", "Dima", "Pavel"));
         List<String> surnames = new ArrayList<>(Arrays.asList("Petukhov", "Provorova", "Savchenko", "Arshavin", "Putin", "Tsiganov", "Ivanov"));

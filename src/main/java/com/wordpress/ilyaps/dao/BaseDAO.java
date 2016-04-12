@@ -76,6 +76,7 @@ public abstract class BaseDAO {
     }
 
     public static <T> Object find(Class clazz, T id) {
+        LOGGER.info(id.toString());
         EntityManager em = DBService.getInstance().getEm();
 
         Object el = null;
