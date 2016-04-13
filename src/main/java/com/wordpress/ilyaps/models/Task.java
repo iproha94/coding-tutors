@@ -12,7 +12,7 @@ import java.util.List;
  * Created by ilyap on 25.12.2015.
  */
 @Entity
-@Table(name = "TASKS")
+@Table(name = "TASK")
 public class Task {
     @Id
     @Column(name = "TASKID")

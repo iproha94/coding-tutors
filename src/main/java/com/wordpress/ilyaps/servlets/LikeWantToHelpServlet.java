@@ -2,11 +2,8 @@ package com.wordpress.ilyaps.servlets;
 
 import com.wordpress.ilyaps.dao.BaseDAO;
 import com.wordpress.ilyaps.dao.MemberDAO;
-import com.wordpress.ilyaps.dao.TaskDAO;
 import com.wordpress.ilyaps.dao.WantToHelpDAO;
-import com.wordpress.ilyaps.models.LikeWantToHelp;
 import com.wordpress.ilyaps.models.Member;
-import com.wordpress.ilyaps.models.Task;
 import com.wordpress.ilyaps.models.WantToHelp;
 
 import javax.servlet.ServletException;
@@ -24,20 +21,20 @@ public class LikeWantToHelpServlet extends HttpServlet {
         PrintWriter pw = response.getWriter();
         response.setContentType("text/html");
 
-        int taskId = new Integer(request.getParameter("task"));
+        String helpId = request.getParameter("help");
+        WantToHelp help = (WantToHelp) BaseDAO.find(WantToHelp.class, new Integer(helpId));
 
-        String emailHelper = request.getParameter("email");
-        Member member = (Member) BaseDAO.find(Member.class, emailHelper);
-        member.incLikes();
-        MemberDAO.update(member);
+        if (!help.isLike()) {
+            help.setLike();
+            BaseDAO.update(help);
 
-        WantToHelp wantToHelp = WantToHelpDAO.findByTaskAndHelper(taskId, member);
-
-        BaseDAO.insert(new LikeWantToHelp(wantToHelp));
+            String emailHelper = request.getParameter("email");
+            Member member = (Member) BaseDAO.find(Member.class, emailHelper);
+            member.incLikes();
+            BaseDAO.update(member);
+        }
 
         pw.println(ServletHelper.SUCCESSFUL);
         pw.println(ServletHelper.getHtmlRedirect("list-my-tasks.jsp"));
     }
-
-
 }

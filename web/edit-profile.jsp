@@ -2,7 +2,6 @@
 <%@ page import="com.wordpress.ilyaps.models.University" %>
 <%@ page import="com.wordpress.ilyaps.dao.UniversityDAO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
 <html>
 <head>
     <title>edit profile</title>
@@ -12,8 +11,7 @@
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
 </head>
 <body>
-    <%@include file='top.jsp' %>
-
+<%@include file='top.jsp' %>
     <div class="container">
         <form action="edit-profile" method="post" class="form-signup">
             <h2 class="form-signup-heading">Edit your profile</h2>

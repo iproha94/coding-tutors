@@ -44,7 +44,7 @@ public class AddBookServlet extends HttpServlet {
         }
 
         pw.println(ServletHelper.SUCCESSFUL);
-        pw.println(ServletHelper.getHtmlRedirect("/list-category.jsp"));
+        pw.println(ServletHelper.getHtmlRedirect("/"));
     }
 
     boolean verificationParametersInRequest(HttpServletRequest request) {

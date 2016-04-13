@@ -2,7 +2,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.wordpress.ilyaps.dao.TaskDAO" %>
 <%@ page import="com.wordpress.ilyaps.models.*" %>
-<%@ page import="com.wordpress.ilyaps.dao.LikeWantToHelpDAO" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: ilyap
   Date: 21.01.2016
@@ -65,16 +65,18 @@
             <% for (WantToHelp help : helps) { %>
             <tr>
                 <form action="like-helper" method="post">
-                    <td width="5%"><% if (!LikeWantToHelpDAO.exist(new LikeWantToHelp(help))) { %>
-                    <button class="btn btn-primary" type="submit">like</button>
-                    <% } %></td>
+                    <td width="5%">
+                        <% if (!help.isLike()) { %>
+                            <button class="btn btn-primary" type="submit">like</button>
+                        <% } %>
+                    </td>
 
                     <td width="15%"><%= help.getMemberHelper().getEmail() %></td>
                     <td width="5%"><%= help.getLevelOfCompliance() %></td>
                     <td><%= help.getNote() %></td>
 
                     <input type="hidden"  name = "email" value = "<%= help.getMemberHelper().getEmail() %>">
-                    <input type="hidden"  name = "task" value = "<%= task.getTaskId() %>">
+                    <input type="hidden"  name = "help" value = "<%= help.getWantToHelpId() %>">
                 </form>
             </tr>
             <%}%>

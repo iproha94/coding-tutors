@@ -3,7 +3,7 @@ package com.wordpress.ilyaps.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "WANTTOHELPS")
+@Table(name = "WANTTOHELP")
 public class WantToHelp {
     @Id
     @Column(name = "WANTTOHELPID")
@@ -19,6 +19,20 @@ public class WantToHelp {
     private String note;
     @Column(name = "LEVELOFCOMPLIANCE")
     private int levelOfCompliance = 0;
+    @Column(name = "ISLIKE")
+    private boolean like = false;
+
+    public boolean isLike() {
+        return like;
+    }
+
+    public int getWantToHelpId() {
+        return wantToHelpId;
+    }
+
+    public void setLike() {
+        like = true;
+    }
 
     public int getLevelOfCompliance() {
         return levelOfCompliance;

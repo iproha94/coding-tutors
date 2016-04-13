@@ -18,14 +18,13 @@ public class AutoFill {
 
     public static void main(String[] args) {
 
-        BaseDAO.drop(Book.class);
-        BaseDAO.drop(WantToHelp.class);
-        BaseDAO.drop(Task.class);
-        BaseDAO.drop(Member.class);
-        BaseDAO.drop(University.class);
         BaseDAO.drop(Category.class);
+        BaseDAO.drop(University.class);
+        BaseDAO.drop(Member.class);
+        BaseDAO.drop(Task.class);
+        BaseDAO.drop(WantToHelp.class);
+        BaseDAO.drop(Book.class);
         BaseDAO.drop(LikeBook.class);
-        BaseDAO.drop(LikeWantToHelp.class);
 
         List<String> firstnames = new ArrayList<>(Arrays.asList("Ilya", "Inna", "Andrey", "Timur", "Jenya", "Dima", "Pavel"));
         List<String> surnames = new ArrayList<>(Arrays.asList("Petukhov", "Provorova", "Savchenko", "Arshavin", "Putin", "Tsiganov", "Ivanov"));
@@ -104,7 +103,7 @@ public class AutoFill {
             tasks.add(task);
         }
 
-        List<String> notes = new ArrayList<>(Arrays.asList("еду", "деньги", " только доллары", "евро", "поцелуй", "бесплтно"));
+        List<String> notes = new ArrayList<>(Arrays.asList("еду", "деньги", " только доллары", "евро", "бесплтно"));
         int maxWantToHelp = 300 + random.nextInt(300);
         for (int i = 0; i < maxWantToHelp; ++i) {
             WantToHelp help = new WantToHelp();
