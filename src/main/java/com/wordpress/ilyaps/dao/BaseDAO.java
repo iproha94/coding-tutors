@@ -1,16 +1,10 @@
 package com.wordpress.ilyaps.dao;
 
-import com.sun.istack.internal.Nullable;
-import com.wordpress.ilyaps.models.Member;
-import com.wordpress.ilyaps.models.Task;
 import com.wordpress.ilyaps.services.DBService;
 import org.apache.log4j.Logger;
 
 import javax.persistence.EntityManager;
 
-/**
- * Created by ilyap on 21.01.2016.
- */
 public abstract class BaseDAO {
     private static final Logger LOGGER = Logger.getLogger(BaseDAO.class);
 

@@ -14,9 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-/**
- * Created by ilyap on 21.01.2016.
- */
 public class WantToHelpServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -52,7 +49,7 @@ public class WantToHelpServlet extends HttpServlet {
         pw.println(ServletHelper.getHtmlRedirect("list-tasks.jsp"));
     }
 
-    boolean verificationParametersInRequest(HttpServletRequest request) {
+    private boolean verificationParametersInRequest(HttpServletRequest request) {
         return request.getParameter("note").length() >= 4;
 
     }

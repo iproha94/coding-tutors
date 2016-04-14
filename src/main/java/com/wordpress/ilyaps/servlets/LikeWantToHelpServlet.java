@@ -1,8 +1,6 @@
 package com.wordpress.ilyaps.servlets;
 
 import com.wordpress.ilyaps.dao.BaseDAO;
-import com.wordpress.ilyaps.dao.MemberDAO;
-import com.wordpress.ilyaps.dao.WantToHelpDAO;
 import com.wordpress.ilyaps.models.Member;
 import com.wordpress.ilyaps.models.WantToHelp;
 
@@ -13,9 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-/**
- * Created by ilyaps on 11.03.16.
- */
 public class LikeWantToHelpServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter pw = response.getWriter();

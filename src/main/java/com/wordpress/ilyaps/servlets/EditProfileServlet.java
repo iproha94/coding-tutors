@@ -10,9 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-/**
- * Created by ilyap on 19.01.2016.
- */
 public class EditProfileServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -48,7 +45,7 @@ public class EditProfileServlet extends HttpServlet {
         pw.println(ServletHelper.getHtmlRedirect("/"));
     }
 
-    boolean verificationParametersInRequest(HttpServletRequest request) {
+    private boolean verificationParametersInRequest(HttpServletRequest request) {
         if (request.getParameter("firstname").length() < 4) {
             return false;
         }

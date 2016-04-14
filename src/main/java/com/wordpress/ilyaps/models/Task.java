@@ -1,16 +1,8 @@
 package com.wordpress.ilyaps.models;
 
-import com.wordpress.ilyaps.dao.TaskDAO;
-import com.wordpress.ilyaps.dao.WantToHelpDAO;
-import com.wordpress.ilyaps.servlets.ServletHelper;
-
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.List;
 
-/**
- * Created by ilyap on 25.12.2015.
- */
 @Entity
 @Table(name = "TASK")
 public class Task {
@@ -82,6 +74,8 @@ public class Task {
     public boolean isOpen() {
         return isOpen;
     }
+
+
 
     public void setOpen(boolean open) {
         isOpen = open;

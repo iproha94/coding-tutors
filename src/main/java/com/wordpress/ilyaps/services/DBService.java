@@ -6,13 +6,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-/**
- * Created by ilyap on 25.12.2015.
- */
 public class DBService {
     private final static Logger LOGGER = Logger.getLogger(DBService.class);
     private final static DBService INSTANCE = new DBService();
-    private EntityManager em;
+    private final EntityManager em;
 
     public static DBService getInstance() {
         return INSTANCE;

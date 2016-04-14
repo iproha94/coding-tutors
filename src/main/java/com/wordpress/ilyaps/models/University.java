@@ -5,10 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-/**
- * Created by ilyap on 28.12.2015.
- */
-
 @Entity
 @Table(name = "UNIVERSITY")
 public class University {

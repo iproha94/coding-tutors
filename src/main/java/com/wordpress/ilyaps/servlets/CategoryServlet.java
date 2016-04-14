@@ -1,6 +1,5 @@
 package com.wordpress.ilyaps.servlets;
 
-import com.wordpress.ilyaps.dao.CategoryDAO;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -10,9 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-/**
- * Created by ilyaps on 10.04.16.
- */
 public class CategoryServlet extends HttpServlet {
     private final static Logger LOGGER = Logger.getLogger(CategoryServlet.class);
 

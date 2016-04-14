@@ -1,8 +1,6 @@
 package com.wordpress.ilyaps.models;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.sql.Timestamp;
 
 @Entity
 @Table(name = "BOOK")
@@ -81,8 +79,7 @@ public class Book {
         this.likes = likes;
     }
 
-    public int incLikes() {
+    public void incLikes() {
         likes++;
-        return likes;
     }
 }

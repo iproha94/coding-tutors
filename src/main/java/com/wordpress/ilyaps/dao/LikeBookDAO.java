@@ -7,9 +7,6 @@ import org.apache.log4j.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 
-/**
- * Created by ilyaps on 12.04.16.
- */
 public class LikeBookDAO extends BaseDAO {
     private static final Logger LOGGER = Logger.getLogger(LikeBookDAO.class);
 

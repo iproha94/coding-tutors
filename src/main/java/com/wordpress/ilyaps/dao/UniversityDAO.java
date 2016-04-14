@@ -1,8 +1,6 @@
 package com.wordpress.ilyaps.dao;
 
-import com.wordpress.ilyaps.models.Task;
 import com.wordpress.ilyaps.models.University;
-import com.wordpress.ilyaps.models.WantToHelp;
 import com.wordpress.ilyaps.services.DBService;
 import org.apache.log4j.Logger;
 
@@ -37,7 +35,7 @@ public class UniversityDAO extends BaseDAO{
     public static List<University> findAll() {
         EntityManager em = DBService.getInstance().getEm();
 
-        List<University> universities = null;
+        List universities = null;
         try {
             em.getTransaction().begin();
             universities = em.createQuery("SELECT w FROM University w")

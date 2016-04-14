@@ -1,7 +1,6 @@
 package com.wordpress.ilyaps.models;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
 @Table(name = "MEMBER")

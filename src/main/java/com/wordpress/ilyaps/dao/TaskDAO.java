@@ -14,9 +14,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Created by ilyap on 25.12.2015.
- */
 public class TaskDAO extends BaseDAO {
     private static final Logger LOGGER = Logger.getLogger(TaskDAO.class);
 
@@ -24,7 +21,7 @@ public class TaskDAO extends BaseDAO {
     public static List<Task> findOpenByCategory(Category category, int start, int count) {
         EntityManager em = DBService.getInstance().getEm();
 
-        List<Task> tasks = null;
+        List tasks = null;
 
         if (start < 0) {
             start = 0;
@@ -54,7 +51,7 @@ public class TaskDAO extends BaseDAO {
     public static List<Task> findAllOpen(int start, int count) {
         EntityManager em = DBService.getInstance().getEm();
 
-        List<Task> tasks = null;
+        List tasks = null;
 
         if (start < 0) {
             start = 0;
@@ -80,7 +77,7 @@ public class TaskDAO extends BaseDAO {
     public static List<Task> findTasksByMemberNeed(Member memberNeed) {
         EntityManager em = DBService.getInstance().getEm();
 
-        List<Task> tasks = null;
+        List tasks = null;
         try {
             em.getTransaction().begin();
             tasks = em.createQuery("SELECT t FROM Task t where t.memberNeed = :value1  ORDER BY t.dateTimeField desc")
@@ -117,7 +114,7 @@ public class TaskDAO extends BaseDAO {
     public static List<Task> searchByWord(String search_word) {
         EntityManager em = DBService.getInstance().getEm();
 
-        List<Task> tasks = null;
+        List tasks = null;
 
         try {
             em.getTransaction().begin();
@@ -136,7 +133,7 @@ public class TaskDAO extends BaseDAO {
     public static List<Task> searchByWord(String search_word, int start, int count) {
         EntityManager em = DBService.getInstance().getEm();
 
-        List<Task> tasks = null;
+        List tasks = null;
 
         if (start < 0) {
             start = 0;
@@ -158,7 +155,7 @@ public class TaskDAO extends BaseDAO {
         return tasks != null ? tasks : new ArrayList<>(0);
     }
 
-    public static Set<Task> search(String search_text, int start, int count) {
+    public static Set<Task> search(String search_text) {
         String[] words = search_text.split(" ");
 
         Set<Task> set = new HashSet<>();

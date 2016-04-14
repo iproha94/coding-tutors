@@ -9,13 +9,9 @@ import com.wordpress.ilyaps.services.DBService;
 import org.apache.log4j.Logger;
 
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by ilyap on 25.12.2015.
- */
 public class WantToHelpDAO extends BaseDAO {
     private static final Logger LOGGER = Logger.getLogger(WantToHelpDAO.class);
 
@@ -23,7 +19,7 @@ public class WantToHelpDAO extends BaseDAO {
     public static List<WantToHelp> findByTaskId(Task task) {
         EntityManager em = DBService.getInstance().getEm();
 
-        List<WantToHelp> helpers = null;
+        List helpers = null;
         try {
             em.getTransaction().begin();
             helpers = em.createQuery("SELECT w FROM WantToHelp w where w.task = :task")

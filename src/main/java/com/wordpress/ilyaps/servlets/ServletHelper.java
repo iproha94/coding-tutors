@@ -1,9 +1,6 @@
 package com.wordpress.ilyaps.servlets;
 
-/**
- * Created by ilyap on 21.01.2016.
- */
-public class ServletHelper {
+class ServletHelper {
     public static final String BAD_FORM = "BAD_FORM";
     public static final String WAIT = "WAIT";
     public static final String SUCCESSFUL = "SUCCESSFUL";

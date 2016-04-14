@@ -21,7 +21,7 @@
     Member member = (Member) request.getSession().getAttribute("member");
     int start = request.getParameter("start") != null ? new Integer(request.getParameter("start")) : 0;
     String searchText = (String) request.getSession().getAttribute("search_text");
-    Set<Task> tasks = TaskDAO.search(searchText, start, 10);
+    Set<Task> tasks = TaskDAO.search(searchText);
 %>
 
     <div class="container">

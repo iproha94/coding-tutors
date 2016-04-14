@@ -14,9 +14,6 @@ import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.util.Date;
 
-/**
- * Created by ilyap on 21.01.2016.
- */
 public class CreateTaskServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -49,7 +46,7 @@ public class CreateTaskServlet extends HttpServlet {
         pw.println(ServletHelper.getHtmlRedirect("/list-my-tasks.jsp"));
     }
 
-    boolean verificationParametersInRequest(HttpServletRequest request) {
+    private boolean verificationParametersInRequest(HttpServletRequest request) {
         if (request.getParameter("title").length() < 4) {
             return false;
         }

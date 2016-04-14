@@ -1,11 +1,8 @@
 package com.wordpress.ilyaps.dao;
 
 import com.sun.istack.internal.NotNull;
-import com.sun.istack.internal.Nullable;
 import com.wordpress.ilyaps.models.Book;
 import com.wordpress.ilyaps.models.Category;
-import com.wordpress.ilyaps.models.Member;
-import com.wordpress.ilyaps.models.Task;
 import com.wordpress.ilyaps.services.DBService;
 import org.apache.log4j.Logger;
 
@@ -16,11 +13,10 @@ import java.util.List;
 public class BookDAO extends BaseDAO {
     private static final Logger LOGGER = Logger.getLogger(BookDAO.class);
 
-    @NotNull
     public static List<Book> findByCategory(Category category) {
         EntityManager em = DBService.getInstance().getEm();
 
-        List<Book> books = null;
+        List books = null;
 
         try {
             em.getTransaction().begin();

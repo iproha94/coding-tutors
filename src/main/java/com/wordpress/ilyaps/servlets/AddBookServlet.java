@@ -2,23 +2,14 @@ package com.wordpress.ilyaps.servlets;
 
 import com.wordpress.ilyaps.dao.BookDAO;
 import com.wordpress.ilyaps.dao.CategoryDAO;
-import com.wordpress.ilyaps.dao.TaskDAO;
 import com.wordpress.ilyaps.models.Book;
-import com.wordpress.ilyaps.models.Member;
-import com.wordpress.ilyaps.models.Task;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Timestamp;
-import java.util.Date;
 
-/**
- * Created by ilyaps on 10.04.16.
- */
 public class AddBookServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -47,7 +38,7 @@ public class AddBookServlet extends HttpServlet {
         pw.println(ServletHelper.getHtmlRedirect("/"));
     }
 
-    boolean verificationParametersInRequest(HttpServletRequest request) {
+    private boolean verificationParametersInRequest(HttpServletRequest request) {
         if (request.getParameter("title").length() < 4) {
             return false;
         }

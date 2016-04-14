@@ -7,9 +7,6 @@ import org.apache.log4j.Logger;
 import javax.persistence.EntityManager;
 import java.util.*;
 
-/**
- * Created by ilyaps on 11.03.16.
- */
 public class CategoryDAO extends BaseDAO{
     private static final Logger LOGGER = Logger.getLogger(CategoryDAO.class);
 
@@ -27,7 +24,7 @@ public class CategoryDAO extends BaseDAO{
     public static List<Category> findAll() {
         EntityManager em = DBService.getInstance().getEm();
 
-        List<Category> categories = null;
+        List categories = null;
         try {
             em.getTransaction().begin();
             categories = em.createQuery("SELECT w FROM Category w")

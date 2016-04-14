@@ -12,7 +12,7 @@
     }
 
     .b {
-        margin-bottom: 0px;
+        margin-bottom: 0;
     }
 </style>
 
