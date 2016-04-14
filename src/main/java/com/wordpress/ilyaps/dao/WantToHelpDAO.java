@@ -1,7 +1,5 @@
 package com.wordpress.ilyaps.dao;
 
-import com.sun.istack.internal.NotNull;
-import com.sun.istack.internal.Nullable;
 import com.wordpress.ilyaps.models.Member;
 import com.wordpress.ilyaps.models.Task;
 import com.wordpress.ilyaps.models.WantToHelp;
@@ -15,7 +13,6 @@ import java.util.List;
 public class WantToHelpDAO extends BaseDAO {
     private static final Logger LOGGER = Logger.getLogger(WantToHelpDAO.class);
 
-    @NotNull
     public static List<WantToHelp> findByTaskId(Task task) {
         EntityManager em = DBService.getInstance().getEm();
 
@@ -34,7 +31,6 @@ public class WantToHelpDAO extends BaseDAO {
         return helpers != null ? helpers : new ArrayList<>(0);
     }
 
-    @Nullable
     public static String getNoteForTaskByEmail(Task task, Member member) {
         EntityManager em = DBService.getInstance().getEm();
 

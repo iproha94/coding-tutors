@@ -1,6 +1,5 @@
 package com.wordpress.ilyaps.dao;
 
-import com.sun.istack.internal.NotNull;
 import com.wordpress.ilyaps.models.Book;
 import com.wordpress.ilyaps.models.Category;
 import com.wordpress.ilyaps.services.DBService;

@@ -1,7 +1,5 @@
 package com.wordpress.ilyaps.dao;
 
-import com.sun.istack.internal.NotNull;
-import com.sun.istack.internal.Nullable;
 import com.wordpress.ilyaps.models.Category;
 import com.wordpress.ilyaps.models.Member;
 import com.wordpress.ilyaps.models.Task;
@@ -17,7 +15,6 @@ import java.util.Set;
 public class TaskDAO extends BaseDAO {
     private static final Logger LOGGER = Logger.getLogger(TaskDAO.class);
 
-    @NotNull
     public static List<Task> findOpenByCategory(Category category, int start, int count) {
         EntityManager em = DBService.getInstance().getEm();
 
@@ -47,7 +44,6 @@ public class TaskDAO extends BaseDAO {
         return tasks != null ? tasks : new ArrayList<>(0);
     }
 
-    @NotNull
     public static List<Task> findAllOpen(int start, int count) {
         EntityManager em = DBService.getInstance().getEm();
 
@@ -73,7 +69,6 @@ public class TaskDAO extends BaseDAO {
         return tasks != null ? tasks : new ArrayList<>(0);
     }
 
-    @NotNull
     public static List<Task> findTasksByMemberNeed(Member memberNeed) {
         EntityManager em = DBService.getInstance().getEm();
 
@@ -92,7 +87,6 @@ public class TaskDAO extends BaseDAO {
         return tasks != null ? tasks : new ArrayList<>(0);
     }
 
-    @Nullable
     public static long countByMember(Member member) {
         EntityManager em = DBService.getInstance().getEm();
 
