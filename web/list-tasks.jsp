@@ -1,11 +1,11 @@
 <%@ page import="com.wordpress.ilyaps.dao.TaskDAO" %>
-<%@ page import="com.wordpress.ilyaps.models.Task" %>
 <%@ page import="java.util.Date" %>
 <%@ page import="java.util.concurrent.TimeUnit" %>
 <%@ page import="com.wordpress.ilyaps.dao.BaseDAO" %>
 <%@ page import="com.wordpress.ilyaps.dao.WantToHelpDAO" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.wordpress.ilyaps.models.Category" %>
+<%@ page import="com.wordpress.ilyaps.models.Task" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>

@@ -23,8 +23,4 @@ public class CategoryServlet extends HttpServlet {
         pw.println(ServletHelper.WAIT);
         pw.println(ServletHelper.getHtmlRedirect("/list-tasks.jsp"));
     }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
 }
