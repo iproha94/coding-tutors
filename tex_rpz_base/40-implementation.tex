@@ -7,11 +7,11 @@
 
 \section{Модель}
 
-Модели представлены Java - классами.
+Модель представлена Java - классом.
 
 \lstinputlisting[language=Java, caption=Пример модели Book.]{code/Book.java} 
 
-Классы модели с помощью ORM отображаются на реляционную СУБД. Концепцию ORM в Java реализует JPA. \textbf{Java Persistence API (JPA)} — API, входящий с версии Java 5 в состав платформ Java SE и Java EE, предоставляет возможность сохранять в удобном виде Java-объекты в базе данных.
+Класс модели с помощью ORM отображаются на реляционную таблицу базы данных. Концепцию ORM в Java реализует JPA. \textbf{Java Persistence API (JPA)} — API, входящий с версии Java 5 в состав платформ Java SE и Java EE, предоставляет возможность сохранять в удобном виде Java-объекты в базе данных.
 
 \lstinputlisting[language=Java, caption=Пример модели Book в контексе ORM.]{code/BookJPA.java} 
 
@@ -26,7 +26,7 @@
 
 Контроллеры реализуются Java сервлетами. \textbf{Сервлет} является интерфейсом Java, реализация которого расширяет функциональные возможности сервера. Сервлет взаимодействует с клиентами посредством принципа запрос-ответ. Хотя сервлеты могут обслуживать любые запросы, они обычно используются для расширения веб-серверов.
 
-В качестве Java веб сервера использутся Apache Tomcat. \textbf{Tomcat} — контейнер сервлетов с открытым исходным кодом, разрабатываемый Apache Software Foundation. Реализует спецификацию сервлетов и спецификацию JavaServer Pages (JSP). Написан на языке Java.
+В качестве веб сервера использутся Apache Tomcat. \textbf{Tomcat} — контейнер сервлетов с открытым исходным кодом, разрабатываемый Apache Software Foundation. Реализует спецификацию сервлетов и спецификацию JavaServer Pages (JSP). Написан на языке Java.
 
 \lstinputlisting[language=Java, caption=Пример сервлета CreateTaskServlet]{code/CreateTaskServlet.java}
 
